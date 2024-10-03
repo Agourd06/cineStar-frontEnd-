@@ -4,31 +4,50 @@ import { TECarousel, TECarouselItem } from "tw-elements-react";
 export default function Carousel() {
     const [client, setClient] = useState({ user: {} });
     const token = localStorage.getItem("token");
+    const [error, setError] = useState('')
+
+
+
+    async function fetchOneMUser() {
+        try {
+            const response = await fetch(`http://localhost:3000/api/client`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' ,
+                      'Authorization': `Bearer ${token}`
+                }
+               
+            });
+
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                setError(errorData.message || 'Failed to fetch user data');
+                return;
+            }
+
+            const userData = await response.json();
+            console.log('user data' + userData);
+            
+            setClient(userData);
+
+        } catch (error) {
+            console.error('Fetch Error:', error);
+            setError(error.message || 'An error occurred while fetching user data');
+        }
+    }
+
+
+
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/client', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.error) {
-                    console.error("Error from API:", data.error);
-                    setClient(null);
-                } else {
-                    setClient(data);  
-                    console.log(data);
-                                      
-                }
-            })
-            .catch((error) => {
-                console.error("Error fetching movie data:", error);
-            });
-    }, []);
+        fetchOneMUser()
+        
+    }, [])
+
+    
     const displayName = client.user?.name;
+    
+    if (error) return <h2 className="text-white text-7xl">{error}</h2>
     return (
         <>
             <TECarousel showControls showIndicators ride="carousel">
