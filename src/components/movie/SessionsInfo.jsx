@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
-export default function SessionsInfo({ MovieId }) {
+export default function SessionsInfo({ MovieId, onReserve , setBackToSession }) {
     const [sessions, setSessions] = useState([]);
     const [error, setError] = useState('');
+    const token = localStorage.getItem("token");
+    const [connection, setConnection] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (token) {
+            setConnection(true);
+        } else {
+            setConnection(false);
+            navigate('/auth');
+        }
+    }, [token, navigate]);
 
     async function fetchSessions() {
         try {
@@ -32,6 +45,14 @@ export default function SessionsInfo({ MovieId }) {
 
     if (error) return <h2>{error}</h2>;
 
+    const handleReserveClick = (session) => {
+        if (connection) {
+            onReserve(session);
+        } else {
+            navigate('/auth');
+        }
+    };
+
     return (
         <div className="bg-black px-6 py-12 font-sans">
             <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-white/50 rounded-lg shadow-md">
@@ -41,16 +62,14 @@ export default function SessionsInfo({ MovieId }) {
 
                         return (
                             <div key={session._id} className="bg-white rounded-2xl p-6">
-                                <i class='bx bxs-slideshow text-black/50' ></i>
+                                <i className='bx bxs-slideshow text-black/50'></i>
                                 <div className="mt-4">
                                     <div className='flex justify-between pr-20'>
                                         <h1 className='text-[#EEBB07] font-bold'>Show Time :</h1>
-
                                         <h2 className='font-semibold'>{formattedDate}</h2>
                                     </div>
                                     <div className='flex justify-between pr-20'>
                                         <h1 className='text-[#EEBB07] font-bold'>Room :</h1>
-
                                         <h2 className='font-semibold'>{session.room.name}</h2>
                                     </div>
 
@@ -58,12 +77,17 @@ export default function SessionsInfo({ MovieId }) {
                                         <button
                                             type="button"
                                             className="flex items-center flex-wrap justify-between gap-2 border rounded-3xl pl-5 pr-3 h-14 w-full hover:bg-[#EEBB07]/30 transition-all duration-300"
+                                            onClick={() => {
+                                                handleReserveClick(session);
+                                                setBackToSession(true);
+                                            }}
                                         >
                                             Reserve
                                             <div className="w-11 h-11 rounded-full bg-[#EEBB07]/95 animate-pulse flex justify-center items-center">
-                                            <i class='bx bxs-right-arrow-square text-black'></i>
+                                                <i className='bx bxs-right-arrow-square text-black'></i>
                                             </div>
                                         </button>
+
                                     </div>
                                 </div>
                             </div>
