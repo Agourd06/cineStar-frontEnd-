@@ -3,6 +3,7 @@ import Seats from "./reservationsSeats.jsx/Seats";
 import { logoutUser } from '../../utils/AuthUtils'
 export default function Reservation({ session, setBackToSession }) {
     const [rows, setRows] = useState([]);
+    const [reservedSeat, setReservedSeat] = useState([]);
     const token = localStorage.getItem("token");
 
 
@@ -28,7 +29,8 @@ export default function Reservation({ session, setBackToSession }) {
             }
     
             const seatData = await response.json();
-    
+   
+            setReservedSeat(seatData.reservedSeats)
             const formattedRows = Array.from({ length: seatData.data.capacity }, (_, index) => {
                 const seatNumber = index + 1;
                 return {
@@ -37,7 +39,6 @@ export default function Reservation({ session, setBackToSession }) {
                 };
             });
     
-            console.log(formattedRows);
     
             setRows(formattedRows);
     
@@ -52,13 +53,14 @@ export default function Reservation({ session, setBackToSession }) {
         }
     }, [session]);
     
+console.log("rows" ,rows);
 
 
     return (
         <div className="font-sans text-center p-4">
             <button className='text-white text-5xl' onClick={() => setBackToSession(false)}>back</button>
             <h1 className="bg-black text-white w-4/5 mx-auto my-4 py-2">SCREEN</h1>
-            <Seats totalSeats={rows.length} sessionId={session._id} />
+            <Seats totalSeats={rows.length} sessionId={session._id} reservedSeats={reservedSeat}/>
           
         </div>
     );
