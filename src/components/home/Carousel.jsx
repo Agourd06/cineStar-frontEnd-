@@ -45,9 +45,9 @@ export default function Carousel() {
     }, [])
 
     
-    const displayName = client.user?.name;
+    const displayName = client.user?.name || 'client';
     
-    if (error) return <h2 className="text-white text-7xl">{error}</h2>
+    // if (error) return <h2 className="text-white text-7xl">{error}</h2>
     return (
         <>
             <TECarousel showControls showIndicators ride="carousel">

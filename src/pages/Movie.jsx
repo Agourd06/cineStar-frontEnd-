@@ -7,11 +7,12 @@ import Reservation from '../components/movie/Reservation';
 
 export default function Movie() {
     const { id } = useParams();
-    const [reservedSession, setReservedSession] = useState(null);
+    const [session, setSession] = useState(null);
     const [backToSession, setBackToSession] = useState(false);
 
-    const handleReserve = (session) => {
-        setReservedSession(session);
+    const handleReserve = (data) => {
+        
+        setSession(data);
     };
 
     return (
@@ -20,8 +21,8 @@ export default function Movie() {
             <div className='lg:mt-[5rem]'>
                 <MovieInfos MovieId={id} />
 
-                {reservedSession && backToSession ? (
-                    <Reservation session={reservedSession} setBackToSession={setBackToSession} />
+                {session && backToSession ? (
+                    <Reservation session={session} setBackToSession={setBackToSession} />
                 ) : (
                     <SessionsInfo MovieId={id} onReserve={handleReserve} setBackToSession={setBackToSession} />
                 )}

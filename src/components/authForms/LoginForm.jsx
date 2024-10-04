@@ -2,7 +2,7 @@ import Input from './Inputs'
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { validateField } from '../../validation/AuthValidation'
-export default function LoginForm({setForm}) {
+export default function LoginForm({ setForm }) {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -26,8 +26,7 @@ export default function LoginForm({setForm}) {
         const emailError = validateField('email', formData.email, setError);
         const passwordError = validateField('password', formData.password, setError);
 
-        console.log(formData.password);
-        
+
         if (emailError || passwordError) {
             console.log(emailError);
             return;

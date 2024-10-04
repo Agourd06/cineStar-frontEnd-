@@ -6,7 +6,7 @@ import Movie from "./pages/Movie";
 export const router = createBrowserRouter([
     {
       path: "/",
-      element: <ProtectedRoute element={<Home/>} requiredRole="client"/>
+      element: <Home/>
     },
     {
       path: "/auth",
@@ -15,6 +15,10 @@ export const router = createBrowserRouter([
     {
       path: "/movie/:id",
       element: <Movie/>
+    },
+    {
+      path: "/reservations/:id",
+      element: <ProtectedRoute element={<Home/>} requiredRole="client"/>
     },
  
   ]);
