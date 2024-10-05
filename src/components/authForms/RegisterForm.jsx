@@ -67,7 +67,7 @@ export default function RegisterForm({setForm}) {
             <form onSubmit={handleSubmit}>
 
                 <div className='w-full flex justify-center'>
-                    <img src='/WhatsApp Image 2024-03-15 at 12.02.25.jpeg' className='w-40 h-40' />
+                    <img src='/logo.png' className='w-40 h-40' />
                 </div>
                 <h3 className="text-white text-3xl font-extrabold mb-8">
                     Sign in

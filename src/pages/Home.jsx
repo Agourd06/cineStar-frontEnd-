@@ -8,8 +8,7 @@ export default function Home() {
 
   return (
     <div >
-      <Navbar />
-      <div className='min-h-screen bg-black/90 '>
+      <div className='min-h-screen  bg-dark'>
         <div className=' min-h-screen'>
           <div className='min-h-[40rem] w-full rounded-lg'>
             <Carousel />

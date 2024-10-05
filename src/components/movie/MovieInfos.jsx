@@ -41,10 +41,10 @@ export default function MovieInfos({ MovieId }) {
 
     if (error) return <h2>{error}</h2>
     return (
-        <div className="bg-black px-6 py-12 font-sans">
+        <div className="bg-dark px-6 py-12 font-sans">
 
 
-            <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-white/50 rounded-lg shadow-md">
+            <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-darker rounded-lg shadow-md">
                 <div className="grid grid-cols-1 lg:grid-cols-6">
                     <div className="h-auto ">
                         <img src={`http://localhost:3000/images/${movie.data.media}`} alt="Image" className="rounded-md object-cover" />

@@ -31,6 +31,7 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
             }
 
             const movieSessions = await response.json();
+            
             setSessions(movieSessions);
         } catch (error) {
             console.error('Fetch Error:', error);
@@ -46,6 +47,7 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
 
     const handleReserveClick = (session) => {
         if (connection) {
+            
             onReserve(session);
             setBackToSession(true); 
         } else {
@@ -54,15 +56,15 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
     };
 
     return (
-        <div className="bg-black px-6 py-12 font-sans">
-            <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-white/50 rounded-lg shadow-md">
+        <div className="bg-dark px-6 py-12 font-sans">
+            <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-darker border border-border rounded-lg shadow-md">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {sessions.map((session) => {
                         const formattedDate = moment(session.displayTime).format('dddd DD/MM');
 
                         return (
-                            <div key={session._id} className="bg-white rounded-2xl p-6">
-                                <i className='bx bxs-slideshow text-black/50'></i>
+                            <div key={session._id} className="bg-dark rounded-2xl p-6 text-text border border-border">
+                                <i className='bx bxs-slideshow text-text'></i>
                                 <div className="mt-4">
                                     <div className='flex justify-between pr-20'>
                                         <h1 className='text-[#EEBB07] font-bold'>Show Time :</h1>
@@ -77,12 +79,12 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
                                         <button
                                             type="button"
                                             className="flex items-center flex-wrap justify-between gap-2 border rounded-3xl pl-5 pr-3 h-14 w-full hover:bg-[#EEBB07]/30 transition-all duration-300"
-                                            onClick={() => handleReserveClick(session)} // Pass the session here
+                                            onClick={() => handleReserveClick(session)} 
                                         >
                                             Reserve
                                             <div className="w-11 h-11 rounded-full bg-[#EEBB07]/95 animate-pulse flex justify-center items-center">
-                                                <i className='bx bxs-right-arrow-square text-black'></i>
-                                            </div>
+                                            <i className='text-xl font-bold bx bx-right-arrow-alt'></i>   
+                                                                                     </div>
                                         </button>
                                     </div>
                                 </div>

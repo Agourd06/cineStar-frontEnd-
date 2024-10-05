@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import Login from "./pages/Auth";
 import  ProtectedRoute  from "./middleWares/MiddleWare"
 import Movie from "./pages/Movie";
+import Reservation from "./pages/Reservation";
 export const router = createBrowserRouter([
     {
       path: "/",
@@ -17,8 +18,8 @@ export const router = createBrowserRouter([
       element: <Movie/>
     },
     {
-      path: "/reservations/:id",
-      element: <ProtectedRoute element={<Home/>} requiredRole="client"/>
+      path: "/reservations",
+      element: <Reservation/>
     },
  
   ]);

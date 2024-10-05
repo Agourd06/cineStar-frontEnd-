@@ -12,6 +12,12 @@ export default {
         sans: ['Playfair Display', 'sans-serif'],  
         serif: ['Merriweather', 'serif'], 
       },
+      colors:{
+        border:'#212325',
+        darker:'#121212',
+        dark:'#14181b',
+        text:'white',
+      },
     },
   },
   plugins: [

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Loader from '../loading/Loader';
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
@@ -35,15 +36,9 @@ export default function Movies() {
   }, []); 
 
   
-  if (loading) {
-    return (
-      <div className="flex flex-row gap-2 w-full justify-center items-center h-36">
-        <div className="w-4 h-4 rounded-full bg-[#EEBB07] animate-bounce"></div>
-        <div className="w-4 h-4 rounded-full bg-[#EEBB07] animate-bounce [animation-delay:-.3s]"></div>
-        <div className="w-4 h-4 rounded-full bg-[#EEBB07] animate-bounce [animation-delay:-.5s]"></div>
-      </div>
-    );
-  }
+  if (loading) return <Loader/>
+    
+  
   
 
   if (error) {

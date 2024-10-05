@@ -3,65 +3,71 @@ import Seats from "./reservationsSeats.jsx/Seats";
 import { logoutUser } from '../../utils/AuthUtils'
 export default function Reservation({ session, setBackToSession }) {
     const [rows, setRows] = useState([]);
-    const [reservedSeat, setReservedSeat] = useState([]);
+    // const [reservedSeat, setReservedSeat] = useState([]);
     const token = localStorage.getItem("token");
 
 
     const fetchSeatData = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/client/room/${session.room._id}`, {
+            if(!session) return
+            const response = await fetch(`http://localhost:3000/api/client/session/${session._id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}` 
+                    'Authorization': `Bearer ${token}`
                 },
             });
-    
+
             if (response.status === 401) {
                 alert("Session expired or invalid token. You will be logged out.");
-                logoutUser(); 
-                return; 
+                logoutUser();
+                return;
             }
-    
+
             if (!response.ok) {
-                const errorData = await response.json(); 
+                const errorData = await response.json();
                 throw new Error(errorData.message || 'Failed to fetch seat data');
             }
-    
+
             const seatData = await response.json();
-   
-            setReservedSeat(seatData.reservedSeats)
-            const formattedRows = Array.from({ length: seatData.data.capacity }, (_, index) => {
+            console.log("Seats", seatData);
+
+
+            const formattedRows = Array.from({ length: seatData.data.room.capacity }, (_, index) => {
                 const seatNumber = index + 1;
                 return {
                     number: seatNumber,
                     isReserved: seatData.reservedSeats.includes(seatNumber),
                 };
             });
-    
-    
+
+
             setRows(formattedRows);
-    
+
         } catch (error) {
             console.error("Error fetching seat data:", error.message);
         }
     };
-    
+
     useEffect(() => {
+
         if (session) {
             fetchSeatData();
         }
     }, [session]);
-    
-console.log("rows" ,rows);
+
 
 
     return (
-        <div className="font-sans text-center p-4">
-            <button className='text-white text-5xl' onClick={() => setBackToSession(false)}>back</button>
-            <h1 className="bg-black text-white w-4/5 mx-auto my-4 py-2">SCREEN</h1>
-            <Seats totalSeats={rows.length} sessionId={session._id} reservedSeats={reservedSeat}/>
-          
+        <div className="font-sans text-center w-4/5 mx-auto">
+            <div className="bg-darker rounded-lg text-white  my-4 py-2 flex justify-between items-center px-4">
+
+                <button className='text-white text-xl' onClick={() => setBackToSession(false)}><i className='bx bx-left-arrow-circle text-3xl' ></i></button>
+                <h1 className="text-lg">Room Seats</h1>
+                <div></div>
+            </div>
+            <Seats seats={rows} sessionId={session._id} />
+
         </div>
     );
 }
