@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Seats from "./reservationsSeats.jsx/Seats";
-import { logoutUser } from '../../utils/AuthUtils'
+import AuthContext from "../../context/AuthContext";
 export default function Reservation({ session, setBackToSession }) {
     const [rows, setRows] = useState([]);
-    // const [reservedSeat, setReservedSeat] = useState([]);
     const token = localStorage.getItem("token");
+    const { logout } = useContext(AuthContext)
 
 
     const fetchSeatData = async () => {
         try {
-            if(!session) return
+            if (!session) return
             const response = await fetch(`http://localhost:3000/api/client/session/${session._id}`, {
                 method: 'GET',
                 headers: {
@@ -20,7 +20,7 @@ export default function Reservation({ session, setBackToSession }) {
 
             if (response.status === 401) {
                 alert("Session expired or invalid token. You will be logged out.");
-                logoutUser();
+                logout()
                 return;
             }
 

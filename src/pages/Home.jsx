@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../components/navbar/navbar';
 import Movies from '../components/home/Movies';
 import Carousel from '../components/home/Carousel';
@@ -18,7 +18,7 @@ export default function Home() {
           <div className='w-[90%] mx-auto pb-2 pt-10'>
             <div>
               <h1 className='text-text text-6xl  font-extrabold'>Now Showing   </h1>
-              <span className='text-text text-lg'> Your Cinema | <span className='text-[#EEBB07]'>CineStar</span> </span>
+              <span className='text-text text-lg'> In Your Cinema | <span className='text-[#EEBB07]'>CineStar</span> </span>
             </div>
 
           </div>

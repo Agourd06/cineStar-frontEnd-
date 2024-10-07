@@ -1,10 +1,13 @@
-import { logoutUser } from "./AuthUtils";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+
+const { logout } = useContext(AuthContext)
 
 
 export function userId() {
     const token = localStorage.getItem('token');
     if (!token) {
-        logoutUser()
+        logout()
         return
     }
     const decodedToken = JSON.parse(atob(token.split('.')[1]));

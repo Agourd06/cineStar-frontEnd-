@@ -6,6 +6,7 @@ import {
 import Alert from "./components/shared/Alert";
 import { router } from './routes';
 import Navbar from "./components/navbar/navbar";
+import { AuthProvider } from "./context/AuthContext";
 export const AlertContext = createContext()
 
 function App() {
@@ -16,13 +17,16 @@ function App() {
   }
   return (
     <div>
-            <Navbar />
 
       <AlertContext.Provider value={handleShowAlert}>
+         <AuthProvider>
+            <Navbar />
+
         <div className="lg:mt-[5rem] overflow-hidden font-Didot bg-dark">
 
         <RouterProvider router={router} />
         </div>
+         </AuthProvider>
       </AlertContext.Provider>
       {alert && <Alert type={alert.type} text={alert.text} />}
     </div>

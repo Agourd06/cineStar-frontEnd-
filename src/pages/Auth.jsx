@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import LoginForm from '../components/authForms/LoginForm'
 import image from '/backgroundLogin.png';
 import RegisterForm from '../components/authForms/RegisterForm';
-import { useParams } from 'react-router-dom';
-import Forgot from '../components/authForms/forgot';
+import { useNavigate, useParams } from 'react-router-dom';
+import ForgotPassword from '../components/authForms/ForgotPassword';
+import ResetPassword from '../components/authForms/ResetPassword';
+import AuthContext from '../context/AuthContext';
 
 export default function Login() {
   const { type } = useParams()
  const [form , setForm] = useState(type ||'login')
-  useEffect(() => {
-    localStorage.removeItem('token');
-  }, []);
+ const { isAuthenticated } = useContext(AuthContext)
+ const navigate = useNavigate()
+
+if(isAuthenticated) return navigate(-1)
 
   const forms = {
     register : <RegisterForm setForm={setForm}/> ,
     login : <LoginForm setForm={setForm}/> ,
-    forgot : <Forgot setForm={setForm}/> ,
-    reset : <></>,
+    forgot : <ForgotPassword setForm={setForm}/> ,
+    reset : <ResetPassword setForm={setForm}/>,
   }
 
   return (

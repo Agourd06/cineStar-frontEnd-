@@ -2,13 +2,20 @@ import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react'
 import { AlertContext } from '../../App';
 import Spinner from '../shared/Spinner';
+import { useNavigate } from 'react-router-dom';
+import { Canceling } from '../../pages/Reservation';
+import AuthContext from '../../context/AuthContext';
 
 
-export default function ReservationCard({ movieName, displayTime, seats, roomName, totalPrice, movieImg, reservationId }) {
+export default function ReservationCard({ movieName, displayTime, seats, roomName, totalPrice, movieImg, reservationId, status }) {
     const formattedDate = moment(displayTime).format('dddd DD/MM HH:mm');
-    const [loading , setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const showAlert = useContext(AlertContext)
     const token = localStorage.getItem('token')
+    const iscancled = useContext(Canceling)
+    const router = useNavigate()
+    const { logout } = useContext(AuthContext)
+
     const cancelReservation = async () => {
         setLoading(true)
         try {
@@ -21,7 +28,7 @@ export default function ReservationCard({ movieName, displayTime, seats, roomNam
             });
             if (response.status === 401) {
                 showAlert("error", "Session Expired Please You need to login again")
-                logoutUser();
+                logout();
                 return;
             }
             if (!response.ok) {
@@ -34,9 +41,9 @@ export default function ReservationCard({ movieName, displayTime, seats, roomNam
             showAlert("error", "error Canceling reservation")
             console.error("error cancling", error)
 
-        }finally{
+        } finally {
             setLoading(false)
-
+            router("/reservations")
         }
 
     }
@@ -68,7 +75,22 @@ export default function ReservationCard({ movieName, displayTime, seats, roomNam
                         </div>
                     </div>
                 </div>
-                <button onClick={cancelReservation} disabled={loading} className='w-full bg-red-700/70 rounded-b-lg text-white'>{loading ? <><Spinner  size={4} color='fill-white' /> Canceling ...</> : 'Cancel'}</button>
+                {status == 'normal' ?
+                    <>
+                        <button onClick={() => {
+                            cancelReservation();
+                            iscancled(true);
+                        }}
+                            disabled={loading} className='w-full bg-red-700/70 rounded-b-lg text-white'>{loading ? <><Spinner size={4} color='fill-white' /> Canceling ...</> : 'Cancel'}
+                        </button>
+                    </>
+                : 
+                <button disabled className='w-full bg-red-700/70 rounded-b-lg text-whit cursor-no-drop'>
+                    Cancled
+                </button>
+
+                }
+
             </div>
 
         </>

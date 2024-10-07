@@ -1,8 +1,8 @@
-import Input from './Inputs'
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { validateField } from '../../validation/AuthValidation'
 import Inputs from './Inputs';
+
 export default function LoginForm({ setForm }) {
     const [formData, setFormData] = useState({
         email: '',

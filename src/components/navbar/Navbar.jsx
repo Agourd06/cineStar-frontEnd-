@@ -9,6 +9,7 @@ export default function Navbar() {
     const toggleNavbar = () => {
         setIsNavbarVisible(prevState => !prevState);
     };
+    const isHomePage = location.pathname === '/';
 
     return (
         <div className='font-Didot'>
@@ -36,7 +37,7 @@ export default function Navbar() {
                     </button>
                 </div>
                 <Menu />
-                <Search />
+                {isHomePage && <Search />}
                 <AuthButtons/>
             </nav>
         </div>

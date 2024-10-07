@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export default function Alert({ type, text }) {
-  const [visible, setVisible] = useState(false); // state to handle visibility
+  const [visible, setVisible] = useState(false); 
 
   let style = {};
 
@@ -39,19 +39,18 @@ export default function Alert({ type, text }) {
   }
 
   useEffect(() => {
-    setVisible(true); // trigger the alert to become visible
+    setVisible(true);
     const timer = setTimeout(() => {
-      setVisible(false); // hide the alert after a few seconds
-    }, 3000); // change the duration if needed
+      setVisible(false);
+    }, 3000);
 
-    return () => clearTimeout(timer); // clean up timeout
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
-      className={`fixed bottom-10 z-50 right-10 flex items-center gap-2 w-1/3 mx-auto pl-2 py-2 rounded-md transition-transform duration-500 ${
-        visible ? "translate-x-0" : "translate-x-full"
-      } ${style.textColor} ${style.bgColor}`}
+      className={`fixed bottom-10 z-50 right-10 flex items-center gap-2 w-1/3 mx-auto pl-2 py-2 rounded-md transition-transform duration-500 ${visible ? "translate-x-0" : "translate-x-full"
+        } ${style.textColor} ${style.bgColor}`}
     >
       <i className={`${style.icon} text-lg`}></i>
       <p>{text}</p>

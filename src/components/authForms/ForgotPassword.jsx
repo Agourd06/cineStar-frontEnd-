@@ -2,14 +2,15 @@ import React, { useContext, useState } from 'react'
 import { validateField } from '../../validation/AuthValidation';
 import Inputs from './Inputs';
 import { AlertContext } from '../../App';
+import Spinner from '../shared/Spinner';
 
-export default function Forgot({setForm}) {
+export default function ForgotPassword({ setForm }) {
     const [formData, setFormData] = useState({
         email: '',
     });
+    const [loading, setLoading] = useState(false);
 
     const alert = useContext(AlertContext)
-    // const navigate = useNavigate();
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
@@ -22,6 +23,7 @@ export default function Forgot({setForm}) {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         const emailError = validateField('email', formData.email, setError);
 
 
@@ -42,10 +44,12 @@ export default function Forgot({setForm}) {
             if (!response.ok) {
                 throw new Error('Invalid email');
             }
-            alert('success' , "in a While You can Check you email for Reset Password")
+            alert('success', "in a While You can Check you email for Reset Password")
         } catch (error) {
             setError('Invalid email');
             console.error('Login error:', error);
+        } finally {
+            setLoading(false)
         }
     };
     return (
@@ -62,16 +66,19 @@ export default function Forgot({setForm}) {
                 {error && <p className='text-red-600'>{error}</p>}
                 <Inputs type='text' name='email' placeholder='Email' onChange={handleChange} />
                 <div className="text-center">
-                    <p className="text-sm mt-4 text-white">Do you remembre you Password ? <a href='/auth/login'
+                    <p className="text-sm mt-4 text-white">Do you remembre your Password ? <a href='/auth/login'
                         className="text-[#EEBB07] font-semibold hover:underline ml-1 whitespace-nowrap">Back to login</a></p>
                 </div>
                 <div className='flex justify-center mt-3'>
                     <button type='submit'
                         className="h-fit text-white w-fit px-[1em] py-[0.25em] hover:text-[#EEBB07] border-[1px] border-gray-700 rounded-full flex justify-center items-center gap-[0.5em] overflow-hidden group hover:translate-y-[0.125em] duration-300 backdrop-blur-[12px]"
                     >
-                        <p className='duration-300'>Login</p>
-                        <i className='bx bxs-log-in-circle  group-hover:translate-x-[10%] duration-300' ></i>
 
+                        {loading ? <><Spinner className="mr-2" size={4} /> Sending Mail ...</> :
+                            <>
+                                <p className='duration-300'>Send mail</p>
+                                <i className='bx bxs-log-in-circle  group-hover:translate-x-[10%] duration-300' ></i>
+                            </>}
                     </button>
                 </div>
 
