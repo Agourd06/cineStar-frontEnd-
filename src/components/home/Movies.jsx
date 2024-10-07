@@ -46,7 +46,7 @@ export default function Movies() {
   }
 
   return (
-    <div className="w-[90%] mx-auto grid xl:grid-cols-5 grid-cols-2 items-end mt-10 gap-x-5 gap-y-8 md:gap-y-20 h-fit pb-5">
+    <div className="w-[90%] mx-auto grid xl:grid-cols-5 grid-cols-2 items-end mt-10 gap-x-5 gap-y-8 md:gap-y-20 h-fit pb-5 border border-border p-2 m-2 bg-darker">
       {movies.map((movie) => (
         <a key={movie._id} href={`/movie/${movie.movie._id}`} className="md:h-[29rem] h-[20rem] text-white xl:mb-4 md:mb-10 ">
           <div

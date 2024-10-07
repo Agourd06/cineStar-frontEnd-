@@ -51,12 +51,12 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
             onReserve(session);
             setBackToSession(true); 
         } else {
-            navigate('/auth');
+            navigate('/auth/login');
         }
     };
 
     return (
-        <div className="bg-dark px-6 py-12 font-sans">
+        <div className="bg-dark px-6 py-12 font-Didot">
             <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-darker border border-border rounded-lg shadow-md">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {sessions.map((session) => {

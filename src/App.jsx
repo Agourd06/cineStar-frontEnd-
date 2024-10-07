@@ -19,7 +19,7 @@ function App() {
             <Navbar />
 
       <AlertContext.Provider value={handleShowAlert}>
-        <div className="lg:mt-[5rem] overflow-hidden">
+        <div className="lg:mt-[5rem] overflow-hidden font-Didot bg-dark">
 
         <RouterProvider router={router} />
         </div>

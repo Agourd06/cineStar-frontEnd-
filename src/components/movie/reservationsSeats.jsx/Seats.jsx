@@ -9,7 +9,6 @@ export default function Seats({ seats, sessionId }) {
     const token = localStorage.getItem("token");
 
     const [reserve, setReserve] = useState([])
-    const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -30,7 +29,7 @@ export default function Seats({ seats, sessionId }) {
 
     const createReservation = async () => {
 
-        setLoading(true)
+        setLoading(true)    
         try {
             if (!reserve.length) {
                 showAlert("warnning", "Chose at least one seat")
@@ -80,7 +79,6 @@ export default function Seats({ seats, sessionId }) {
         <p>Your reservation has been successfully created ! Check your E-mail for more information</p>
         <a href="/reservations" className='underline'>See all your reservations</a>
     </div>
-    if (error) return <h2 className='text-white'>{error}</h2>
 
     return (
         <div className='py-4 '>

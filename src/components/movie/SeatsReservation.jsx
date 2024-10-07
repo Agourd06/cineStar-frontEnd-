@@ -59,7 +59,7 @@ export default function Reservation({ session, setBackToSession }) {
 
 
     return (
-        <div className="font-sans text-center w-4/5 mx-auto">
+        <div className="font-Didot text-center w-4/5 mx-auto">
             <div className="bg-darker rounded-lg text-white  my-4 py-2 flex justify-between items-center px-4">
 
                 <button className='text-white text-xl' onClick={() => setBackToSession(false)}><i className='bx bx-left-arrow-circle text-3xl' ></i></button>

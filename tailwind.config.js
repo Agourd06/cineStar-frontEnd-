@@ -9,8 +9,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Playfair Display', 'sans-serif'],  
-        serif: ['Merriweather', 'serif'], 
+        Didot: ["Candara", "sans-serif"],
       },
       colors:{
         border:'#212325',

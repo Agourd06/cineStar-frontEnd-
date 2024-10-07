@@ -7,22 +7,26 @@ export default function Home() {
 
 
   return (
-    <div >
+   
       <div className='min-h-screen  bg-dark'>
+        
         <div className=' min-h-screen'>
-          <div className='min-h-[40rem] w-full rounded-lg'>
+          <div className='min-h-[40rem] w-full rounded-lg p-10 border border-border overflow-hidden'>
             <Carousel />
           </div>
 
-          <div className='w-[90%] mx-auto pb-2'>
+          <div className='w-[90%] mx-auto pb-2 pt-10'>
+            <div>
+              <h1 className='text-text text-6xl  font-extrabold'>Now Showing   </h1>
+              <span className='text-text text-lg'> Your Cinema | <span className='text-[#EEBB07]'>CineStar</span> </span>
+            </div>
 
-            <h1 className='text-white/60 text-4xl text-center font-extrabold'>In ROOMS</h1>
           </div>
           <Movies />
 
         </div>
       </div>
-    </div>
+   
 
   )
 }

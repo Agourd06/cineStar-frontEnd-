@@ -51,7 +51,7 @@ export default function RegisterForm({setForm}) {
             const data = await response.json();
 
             if (data ) {
-               setForm(true)
+               setForm('auth/login')
                 
             } else {
                 console.error('Account creation failed');
@@ -77,8 +77,8 @@ export default function RegisterForm({setForm}) {
                 <Inputs type='text' name='email' placeholder='Email' onChange={handleChange} />
                 <Inputs type='password' name='password' placeholder='Password' onChange={handleChange} />
                 <div className="text-center">
-                    <p className="text-sm mt-4 text-white">Already Have an Account ? <button type='button' onClick={() => setForm(true)}
-                        className="text-[#EEBB07] font-semibold hover:underline ml-1 whitespace-nowrap">login here</button></p>
+                    <p className="text-sm mt-4 text-white">Already Have an Account ? <a href='/auth/login' 
+                        className="text-[#EEBB07] font-semibold hover:underline ml-1 whitespace-nowrap">login here</a></p>
                 </div>
                 <div className='flex justify-center mt-3'>
                     <button type='submit'

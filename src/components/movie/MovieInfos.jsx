@@ -41,7 +41,7 @@ export default function MovieInfos({ MovieId }) {
 
     if (error) return <h2>{error}</h2>
     return (
-        <div className="bg-dark px-6 py-12 font-sans">
+        <div className="bg-dark px-6 py-12 font-Didot">
 
 
             <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-darker rounded-lg shadow-md">

@@ -1,14 +1,15 @@
-import Input from './Inputs'
-import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
-import { validateField } from '../../validation/AuthValidation'
+import React, { useContext, useState } from 'react'
+import { validateField } from '../../validation/AuthValidation';
 import Inputs from './Inputs';
-export default function LoginForm({ setForm }) {
+import { AlertContext } from '../../App';
+
+export default function Forgot({setForm}) {
     const [formData, setFormData] = useState({
         email: '',
-        password: '',
     });
-    const navigate = useNavigate();
+
+    const alert = useContext(AlertContext)
+    // const navigate = useNavigate();
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
@@ -19,66 +20,50 @@ export default function LoginForm({ setForm }) {
         }));
         setError('')
     };
-
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const emailError = validateField('email', formData.email, setError);
-        const passwordError = validateField('password', formData.password, setError);
 
 
-        if (emailError || passwordError) {
-            console.log(emailError);
+        if (emailError) {
             return;
         }
         try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const response = await fetch('http://localhost:3000/api/auth/forgot-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     email: formData.email,
-                    password: formData.password,
                 }),
             });
 
             if (!response.ok) {
-                throw new Error('Invalid email or password');
+                throw new Error('Invalid email');
             }
-
-            const data = await response.json();
-
-            const { token } = data;
-
-            localStorage.setItem('token', token);
-
-
-            navigate('/');
+            alert('success' , "in a While You can Check you email for Reset Password")
         } catch (error) {
-            setError('Invalid email or password');
+            setError('Invalid email');
             console.error('Login error:', error);
         }
     };
-
     return (
         <div className='border bg-black shadow-[#EEBB07] rounded-lg p-6 max-w-md shadow-md border-[#EEBB07] max-md:mx-auto'>
             <form onSubmit={handleSubmit}>
 
                 <div className='w-full flex justify-center'>
-                    <img src='/logo.png' className='w-40 h-40' />
+                    <img src='/logo.png' className='w-36 h-36' />
                 </div>
-                <h3 className="text-white text-3xl font-extrabold mb-8">
-                    Sign in
+                <h3 className="text-white text-center text-3xl font-extrabold mb-8 mt-4">
+                    Forgot Password
                 </h3>
 
                 {error && <p className='text-red-600'>{error}</p>}
                 <Inputs type='text' name='email' placeholder='Email' onChange={handleChange} />
-                <Inputs type='password' name='password' placeholder='Password' onChange={handleChange} />
                 <div className="text-center">
-                    <p className="text-sm mt-4 text-white">Don't have an account ? <a href='/auth/register' 
-                        className="text-[#EEBB07] font-semibold hover:underline ml-1 whitespace-nowrap">Register here</a></p>
+                    <p className="text-sm mt-4 text-white">Do you remembre you Password ? <a href='/auth/login'
+                        className="text-[#EEBB07] font-semibold hover:underline ml-1 whitespace-nowrap">Back to login</a></p>
                 </div>
                 <div className='flex justify-center mt-3'>
                     <button type='submit'
@@ -91,6 +76,5 @@ export default function LoginForm({ setForm }) {
                 </div>
 
             </form>
-        </div>
-    )
+        </div>)
 }
