@@ -59,7 +59,7 @@ export default function Reservation() {
         <Canceling.Provider value={setIsCancled}>
             <div className='bg-dark min-h-screen '>
 
-                <div className='lg:max-w-7xl max-w-lg mx-auto h-full  pt-10 pb-5'>
+                <div className='max-w-[95%] lg:max-w-[85%]  mx-auto h-full  pt-10 pb-5'>
 
                     {loading ? <Loader /> : <ReservationsList reservations={reservations} />}
 

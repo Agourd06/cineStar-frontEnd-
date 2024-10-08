@@ -50,7 +50,7 @@ export default function ReservationCard({ movieName, displayTime, seats, roomNam
 
     return (
         <>
-            <div className='bg-darker border border-border rounded-lg shadow-md text-text/70'>
+            <div className='relative bg-darker border border-border rounded-lg shadow-md text-text/70'>
                 <div className='px-6 py-4 grid grid-cols-3 gap-4'>
                     <img src={`http://localhost:3000/images/${movieImg}`} alt="movie" />
                     <div className='col-span-2'>
@@ -81,13 +81,13 @@ export default function ReservationCard({ movieName, displayTime, seats, roomNam
                             cancelReservation();
                             iscancled(true);
                         }}
-                            disabled={loading} className='w-full bg-red-700/70 rounded-b-lg text-white'>{loading ? <><Spinner size={4} color='fill-white' /> Canceling ...</> : 'Cancel'}
+                            disabled={loading} className='w-full absolute bottom-0 bg-red-700/70 rounded-b-lg text-white'>{loading ? <><Spinner size={4} color='fill-white' /> Canceling ...</> : 'Cancel'}
                         </button>
                     </>
-                : 
-                <button disabled className='w-full bg-red-700/70 rounded-b-lg text-whit cursor-no-drop'>
-                    Cancled
-                </button>
+                    :
+                    <button disabled className='w-full absolute bottom-0 bg-red-700/70 rounded-b-lg text-whit cursor-no-drop'>
+                        Canceled
+                    </button>
 
                 }
 

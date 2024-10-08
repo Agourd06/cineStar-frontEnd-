@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { validateField } from '../../validation/AuthValidation'
 import Inputs from './Inputs';
 
@@ -76,8 +76,12 @@ export default function LoginForm({ setForm }) {
                 {error && <p className='text-red-600'>{error}</p>}
                 <Inputs type='text' name='email' placeholder='Email' onChange={handleChange} />
                 <Inputs type='password' name='password' placeholder='Password' onChange={handleChange} />
+                <div className='pt-1'>
+                   <a href='/auth/forgot'
+                        className="text-[#EEBB07] font-semibold hover:underline ml-1 whitespace-nowrap">Forget Password ?</a>
+                </div>
                 <div className="text-center">
-                    <p className="text-sm mt-4 text-white">Don't have an account ? <a href='/auth/register' 
+                    <p className="text-sm mt-4 text-white">Don't have an account ? <a href='/auth/register'
                         className="text-[#EEBB07] font-semibold hover:underline ml-1 whitespace-nowrap">Register here</a></p>
                 </div>
                 <div className='flex justify-center mt-3'>

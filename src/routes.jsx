@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import Login from "./pages/Auth";
 import  ProtectedRoute  from "./middleWares/MiddleWare"
 import Movie from "./pages/Movie";
 import Reservation from "./pages/Reservation";
+import NotFound from "./pages/NotFound";
 export const router = createBrowserRouter([
     {
       path: "/",
@@ -20,6 +21,9 @@ export const router = createBrowserRouter([
     {
       path: "/reservations",
       element: <Reservation/>
+    }, {
+      path: "*", 
+      element: <NotFound />,
     },
  
   ]);

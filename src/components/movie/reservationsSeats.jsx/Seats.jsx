@@ -78,29 +78,29 @@ export default function Seats({ seats, sessionId }) {
                         disabled={isReserved}
                         key={number}
                         className={`relative w-full h-16 flex flex-col items-center justify-center rounded-lg shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl 
-                        ${isReserved ? 'bg-red-800 hover:cursor-not-allowed' : 
-                            (isUserReserved(number) ? 'bg-green-700' : 
-                            'bg-darker/50 hover:bg-darker hover:cursor-pointer')}`}
+                        ${isReserved ? 'bg-red-800 hover:cursor-not-allowed' :
+                                (isUserReserved(number) ? 'bg-green-700' :
+                                    'bg-darker/50 hover:bg-darker hover:cursor-pointer')}`}
                     >
-                       <svg 
-  xmlns="http://www.w3.org/2000/svg" 
-  viewBox="0 0 24 24" 
-  fill="none" 
-  stroke="currentColor" 
-  stroke-width="2" 
-  stroke-linecap="round" 
-  stroke-linejoin="round" 
-  class="icon cinema-chair-icon" 
-  width="48" 
-  height="48"
->
-  <rect x="6" y="8" width="12" height="12" rx="3" ry="3" fill="#C62828" stroke="#B71C1C" />
-  <rect x="5" y="6" width="14" height="2" fill="#B71C1C" />
-  <rect x="4" y="20" width="16" height="2" fill="#B71C1C" />
-  <path d="M8 18v2M16 18v2" stroke="#B71C1C" />
-  <path d="M2 8h20" stroke="#B71C1C" />
-  <path d="M8 8v-2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="#B71C1C" />
-</svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon cinema-chair-icon"
+                            width="48"
+                            height="48"
+                        >
+                            <rect x="6" y="8" width="12" height="12" rx="3" ry="3" fill="#C62828" stroke="#B71C1C" />
+                            <rect x="5" y="6" width="14" height="2" fill="#B71C1C" />
+                            <rect x="4" y="20" width="16" height="2" fill="#B71C1C" />
+                            <path d="M8 18v2M16 18v2" stroke="#B71C1C" />
+                            <path d="M2 8h20" stroke="#B71C1C" />
+                            <path d="M8 8v-2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="#B71C1C" />
+                        </svg>
 
                         <span className="absolute top-2 right-2 mt-1 text-sm font-extrabold text-text/70">
                             {number}
@@ -108,7 +108,7 @@ export default function Seats({ seats, sessionId }) {
                     </button>
                 ))}
             </div>
-            <div className="bg-darker border border-border text-text h-12 flex justify-between rounded-lg items-center px-6 py-8">
+            <div className="bg-darker border border-border text-text min-h-12 flex justify-between rounded-lg items-center px-6 py-8">
                 <div className='flex'>
                     <h1 className="text-lg">Reserved Seats:</h1>
                     <h2 className="text-lg ml-5">{reserve.length > 0 ? reserve.join(' , ') : 'None'}</h2>

@@ -3,25 +3,38 @@ import Spinner from '../shared/Spinner';
 import { searchMovies } from '../fetchers/SearchSessionFetch';
 
 export default function Search() {
+    const [search, setSearch] = useState({ search: '' });
     const [movies, setMovies] = useState([]);
-    const [search, setSearch] = useState({
-        search: ''
-    });
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
-
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+  
     const handleSearch = (e) => {
-        const { name, value } = e.target;
-        setSearch((prev) => ({
-            ...prev,
-            [name]: value,
-        }))
+      const { name, value } = e.target;
+  
+      setSearch((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+  
+      if (value === '') {
+        setMovies([]);
+      }
+    };
+  
+    useEffect(() => {
+      if (search.search) {
         searchMovies(setLoading, setError, setMovies, search.search);
+      }
+    }, [search.search]); 
 
-    }
 
+    const truncateString = (str, maxLength) => {
+        if (str.length > maxLength) {
+            return str.slice(0, maxLength) + '...'; 
+        }
+        return str; 
+    };
 
-   
 
 
     return (
@@ -29,7 +42,7 @@ export default function Search() {
             <div
                 className='flex xl:w-80 max-xl:w-full bg-gray-100/45 px-6 py-3  rounded border border-solid border-gray-200/50 outline outline-transparent focus-within:bg-transparent'>
                 <input
-                    type='text'
+                    type='search'
                     placeholder='Search something...'
                     name='search'
                     onChange={handleSearch}
@@ -47,13 +60,15 @@ export default function Search() {
                     <>  {
                         movies.map((movie) => (
 
-                            <div key={movie._id} className="p-3 border-b border-gray-700 hover:bg-gray-800 flex cursor-pointer gap-4">
-                                <img src="/WhatIf.png" alt="" className='w-10 ' />
+                            <a key={movie._id} href={`/movie/${movie._id}`} className="p-3 border-b border-gray-700 hover:bg-gray-800 flex cursor-pointer gap-4">
+                                <img src={`http://localhost:3000/images/${movie.media}`} alt="" className='w-14 ' />
                                 <div>
-                                    <p>{movie.name}</p>
-                                    <p>Thursday 23/10 12:15</p>
+                                    <p className='text-lg font-bold'>{movie.name}</p>
+                                    <hr />
+                                    <p>{truncateString(movie.description,40)}</p>
                                 </div>
-                            </div>
+                            </a>
+
                         ))
                     }</>
                 }

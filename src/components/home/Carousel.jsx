@@ -48,26 +48,25 @@ export default function Carousel() {
 
     const displayName = client.user?.name || 'client';
 
-    // if (error) return <h2 className="text-white text-7xl">{error}</h2>
     return (
         <>
             <TECarousel showControls showIndicators ride="carousel">
                 <div className="relative w-full overflow-hidden after:clear-both after:block after:content-[''] shadow-darker shadow-2xl">
                     <TECarouselItem
                         itemID={1}
-                        className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                        className="relative float-left -mr-[100%]  w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     >
                         <div className="bg-darker/50 absolute top-0 bottom-0 left-0 right-0">
 
                         </div>
                         <img
-                            src="/john-wick-2-guns.jpg"
+                            src="/HomeCarousel1.jpg"
                             className="block w-full h-[85vh]"
                             alt="..."
                         />
-                        <div className="absolute inset-x-[15%] bottom-1/3 hidden py-5 text-center md:flex md:flex-col gap-y-10 text-white ">
-                            <h5 className="text-5xl font-extrabold ">Welcom <span className="text-[#EEBB07] uppercase">{displayName}</span>  </h5>
-                            <p className="text-3xl font-bold">
+                        <div className="absolute inset-x-[15%] bottom-1/3  py-5 text-center md:flex md:flex-col md:gap-y-10 gap-y-20 text-white ">
+                            <h5 className="md:text-5xl text-3xl font-extrabold mb-4">Welcom <span className="text-[#EEBB07] uppercase">{displayName}</span>  </h5>
+                            <p className="md:text-3xl text-xl font-bold">
                                 Welcome to CineStar! Discover the magic of movies with us.
                             </p>
                         </div>
@@ -80,13 +79,12 @@ export default function Carousel() {
 
                         </div>
                         <img
-                            src="/MV5BMGQ1ZGZmNTAtM2MyYi00NmZhLTkwYmYtNTNlZDRhMzU2ZTgwXkEyXkFqcGdeQW1yb3NzZXI@._V1_.jpg"
+                            src="/HomeCarousel2.jpg"
                             className="block w-full h-[85vh]"
                             alt="..."
                         />
-                        <div className="absolute inset-x-[15%] bottom-1/3 hidden py-5 text-center md:flex md:flex-col gap-y-10 text-white ">
-                            {/* <h5 className="text-5xl"></h5> */}
-                            <p className="text-3xl font-bold">
+                        <div className="absolute inset-x-[15%] bottom-1/3  py-5 text-center md:flex md:flex-col gap-y-10 text-white ">
+                            <p className="md:text-3xl text-xl font-bold">
                                 Join us for a Cinematic Experience! Welcome to your favorite movie destination!
                             </p>
                         </div>
@@ -99,13 +97,12 @@ export default function Carousel() {
 
                         </div>
                         <img
-                            src="/spider.webp"
+                            src="/HomeCarousel3.jpg"
                             className="block w-full h-[85vh]"
                             alt="..."
                         />
                         <div className="absolute inset-x-[15%] bottom-1/3 hidden py-5 text-center md:flex md:flex-col gap-y-10 text-white ">
-                            {/* <h5 className="text-xl">Third slide label</h5> */}
-                            <p className="text-3xl font-bold">
+                            <p className="md:text-3xl text-xl font-bold">
                                 Lights, Camera, Action! Welcome to the ultimate cinema experience!
                             </p>
                         </div>
