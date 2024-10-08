@@ -65,8 +65,7 @@ export default function ResetPassword({ setForm }) {
             console.error('Reset error:', error);
         } finally {
             setLoading(false)
-            navigate('/auth/login');
-
+            navigate('/auth/login')
         }
     };
 
@@ -84,7 +83,10 @@ export default function ResetPassword({ setForm }) {
                 {error && <p className='text-red-600'>{error}</p>}
                 <Inputs type='password' name='password' placeholder='Password' onChange={handleChange} />
                 <Inputs type='password' name='confirmPassword' placeholder='confirm Password' onChange={handleChange} />
-
+                <div className="text-center">
+                    <p className="text-sm mt-4 text-white">Do you remembre your Password ? <a href='/auth/login'
+                        className="text-[#EEBB07] font-semibold hover:underline ml-1 whitespace-nowrap">Back to login</a></p>
+                </div>
                 <div className='flex justify-center mt-3'>
                     <button type='submit'
                         className="h-fit text-white w-fit px-[1em] py-[0.25em] hover:text-[#EEBB07] border-[1px] border-gray-700 rounded-full flex justify-center items-center gap-[0.5em] overflow-hidden group hover:translate-y-[0.125em] duration-300 backdrop-blur-[12px]"

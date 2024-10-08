@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import Seats from "./reservationsSeats.jsx/Seats";
 import AuthContext from "../../context/AuthContext";
+import { AlertContext } from "../../App";
 export default function Reservation({ session, setBackToSession }) {
     const [rows, setRows] = useState([]);
     const token = localStorage.getItem("token");
     const { logout } = useContext(AuthContext)
+    const alert = useContext(AlertContext)
 
 
     const fetchSeatData = async () => {
@@ -19,18 +21,16 @@ export default function Reservation({ session, setBackToSession }) {
             });
 
             if (response.status === 401) {
-                alert("Session expired or invalid token. You will be logged out.");
+                alert('warrning','your session expired Please login again')
                 logout()
                 return;
             }
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to fetch seat data');
+                alert('error','Problem in showing sessions please try again')
             }
 
             const seatData = await response.json();
-            console.log("Seats", seatData);
 
 
             const formattedRows = Array.from({ length: seatData.data.room.capacity }, (_, index) => {
@@ -45,6 +45,7 @@ export default function Reservation({ session, setBackToSession }) {
             setRows(formattedRows);
 
         } catch (error) {
+            alert('error','Problem in showing sessions please try again')
             console.error("Error fetching seat data:", error.message);
         }
     };

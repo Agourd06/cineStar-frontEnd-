@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
+import { AlertContext } from '../../App';
 
 export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
     const [sessions, setSessions] = useState([]);
@@ -8,6 +9,7 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
     const token = localStorage.getItem("token");
     const [connection, setConnection] = useState(false);
     const navigate = useNavigate();
+    const alert = useContext(AlertContext)
 
     useEffect(() => {
         if (token) {
@@ -25,8 +27,8 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                setError(errorData.message || 'Failed to fetch sessions data');
+                alert('error','Problem in showing sessions please try again')
+
                 return;
             }
 
@@ -35,7 +37,7 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
             setSessions(movieSessions);
         } catch (error) {
             console.error('Fetch Error:', error);
-            setError(error.message || 'An error occurred while fetching sessions data');
+            alert('error','Problem in showing sessions please try again')
         }
     }
 
@@ -51,7 +53,7 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
             onReserve(session);
             setBackToSession(true); 
         } else {
-            navigate('/auth/login');
+            alert('warnning','your session expired Please login again')
         }
     };
 
