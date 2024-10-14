@@ -27,17 +27,17 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
             });
 
             if (!response.ok) {
-                alert('error','Problem in showing sessions please try again')
+                alert('error', 'Problem in showing sessions please try again')
 
                 return;
             }
 
             const movieSessions = await response.json();
-            
+
             setSessions(movieSessions);
         } catch (error) {
             console.error('Fetch Error:', error);
-            alert('error','Problem in showing sessions please try again')
+            alert('error', 'Problem in showing sessions please try again')
         }
     }
 
@@ -49,16 +49,18 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
 
     const handleReserveClick = (session) => {
         if (connection) {
-            
+
             onReserve(session);
-            setBackToSession(true); 
+            setBackToSession(true);
         } else {
-            alert('warnning','your session expired Please login again')
+            alert('warnning', 'your session expired Please login again')
         }
     };
 
     return (
         <div className="bg-dark px-6 py-12 font-Didot">
+            <h1 className='lg:max-w-7xl max-w-lg mx-auto text-text md:text-6xl text-2xl font-extrabold py-1'>Sessions  </h1>
+
             <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-darker border border-border rounded-lg shadow-md">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {sessions.map((session) => {
@@ -81,12 +83,12 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
                                         <button
                                             type="button"
                                             className="flex items-center flex-wrap justify-between gap-2 border rounded-3xl pl-5 pr-3 h-14 w-full hover:bg-[#EEBB07]/30 transition-all duration-300"
-                                            onClick={() => handleReserveClick(session)} 
+                                            onClick={() => handleReserveClick(session)}
                                         >
                                             Reserve
                                             <div className="w-11 h-11 rounded-full bg-[#EEBB07]/95 animate-pulse flex justify-center items-center">
-                                            <i className='text-xl font-bold bx bx-right-arrow-alt'></i>   
-                                                                                     </div>
+                                                <i className='text-xl font-bold bx bx-right-arrow-alt'></i>
+                                            </div>
                                         </button>
                                     </div>
                                 </div>

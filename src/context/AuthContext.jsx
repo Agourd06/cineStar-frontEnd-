@@ -18,12 +18,12 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         localStorage.removeItem('token');
-        window.location.href = '/auth/login';  
+        window.location.href = '/auth/login';
         setIsAuthenticated(false);
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated,  logout , token}}>
+        <AuthContext.Provider value={{ isAuthenticated, logout, token }}>
             {children}
         </AuthContext.Provider>
     );

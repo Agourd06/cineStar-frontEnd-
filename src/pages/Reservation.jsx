@@ -35,7 +35,6 @@ export default function Reservation() {
                 return
             }
             const data = await response.json()
-            console.log(data.reservations);
             setReservations(data.reservations)
         } catch (error) {
             showAlert("error", "resevation fetching error")

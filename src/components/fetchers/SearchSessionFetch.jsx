@@ -3,7 +3,6 @@ import React from 'react'
 export async function searchMovies(setLoading, setError, setMovies, search) {
     try {
         setLoading(true);
-        console.log("search" ,search);
         
         if (!search || search.trim() === '') {
             setMovies([]); 

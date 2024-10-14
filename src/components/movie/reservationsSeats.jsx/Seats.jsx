@@ -90,7 +90,7 @@ export default function Seats({ seats, sessionId }) {
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="icon cinema-chair-icon"
+                            className="icon cinema-chair-icon"
                             width="48"
                             height="48"
                         >
