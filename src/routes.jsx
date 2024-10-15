@@ -4,6 +4,7 @@ import Login from "./pages/Auth";
 import Movie from "./pages/Movie";
 import Reservation from "./pages/Reservation";
 import NotFound from "./pages/NotFound";
+import DashBoard from "./pages/admin/DashBoard";
 export const router = createBrowserRouter([
     {
       path: "/",
@@ -20,7 +21,12 @@ export const router = createBrowserRouter([
     {
       path: "/reservations",
       element: <Reservation/>
-    }, {
+    },
+    {
+      path: "/dashboard",
+      element: <DashBoard/>
+    },
+     {
       path: "*", 
       element: <NotFound />,
     },

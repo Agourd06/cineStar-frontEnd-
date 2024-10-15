@@ -5,9 +5,8 @@ import {
 } from "react-router-dom";
 import Alert from "./components/shared/Alert";
 import { router } from './routes';
-import Navbar from "./components/navbar/Navbar";
 import { AuthProvider } from "./context/AuthContext";
-import Footer from "./components/footer/Footer";
+import SideBarContext, { SideBarProvider } from "./context/SideBarContext";
 export const AlertContext = createContext()
 
 function App() {
@@ -21,13 +20,12 @@ function App() {
 
       <AlertContext.Provider value={handleShowAlert}>
         <AuthProvider>
-          <Navbar />
+          <SideBarProvider>
+            <div className=" overflow-hidden font-Didot bg-dark">
 
-          <div className="lg:mt-[5rem] overflow-hidden font-Didot bg-dark">
-
-            <RouterProvider router={router} />
-          </div>
-          <Footer />
+              <RouterProvider router={router} />
+            </div>
+          </SideBarProvider>
         </AuthProvider>
       </AlertContext.Provider>
       {alert && <Alert type={alert.type} text={alert.text} />}

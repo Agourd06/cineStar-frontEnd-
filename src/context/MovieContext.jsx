@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AuthContext from './AuthContext';
 import { AlertContext } from '../App';
-import { makeApiRequest } from '../components/fetchers/Fetch';
+import { fetchData } from '../components/fetchers/Fetch';
 
 const MovieContext = createContext();
 
@@ -9,28 +9,26 @@ export const MovieProvider = ({ children, MovieId }) => {
     const [movie, setMovie] = useState({ data: {} });
     const [loading, setLoading] = useState(false);
     const alert = useContext(AlertContext);
-    const { logout } = useContext(AuthContext);
+
 
     useEffect(() => {
-        const fetchOneMovie = async () => {
-            if (!MovieId) {
-                alert('warning', 'No movie ID provided');
-                return;
+        const getData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetchData(`public/movie/${MovieId}`, 'GET');
+                setMovie(response);
+            } catch (err) {
+                if (err.message === 'Unauthorized') {
+                    alert('warnning','Your session has expired. Please log in again.');
+                } else {
+                    alert('error', err.message);
+                }
+            } finally {
+                setLoading(false);
             }
-            await makeApiRequest(
-                `public/movie/${MovieId}`,
-                setLoading,
-                setMovie,
-                'GET',
-                null,
-                alert,
-                null,
-                null,
-                logout
-            );
         };
 
-        fetchOneMovie();
+        getData();
     }, [MovieId]);
 
     return (

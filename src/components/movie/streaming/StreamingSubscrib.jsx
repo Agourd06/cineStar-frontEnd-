@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { makeApiRequest } from '../../fetchers/Fetch';
+import { fetchData } from '../../fetchers/Fetch';
 import AuthContext from '../../../context/AuthContext';
 import { AlertContext } from '../../../App';
 import Spinner from '../../shared/Spinner';
@@ -9,19 +9,25 @@ export default function StreamingSubscrib({ handleToggle }) {
     const alert = useContext(AlertContext);
     const { logout, token } = useContext(AuthContext);
 
+
     const subscribClient = async () => {
-        await makeApiRequest(
-            'client/subscribe',
-            setLoading,
-            null,
-            'PUT',
-            token,
-            alert,
-            null,
-            null,
-            logout
-        );
+        setLoading(true);
+        try {
+            await fetchData('client/subscribe', 'PUT', token);
+        } catch (err) {
+
+
+            alert('info', 'Login For more access')
+            logout()
+
+
+        } finally {
+            setLoading(false);
+        }
     };
+
+
+
 
     return (
         <div

@@ -5,7 +5,6 @@ import { AlertContext } from '../../App';
 
 export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
     const [sessions, setSessions] = useState([]);
-    const [error, setError] = useState('');
     const token = localStorage.getItem("token");
     const [connection, setConnection] = useState(false);
     const navigate = useNavigate();
@@ -45,7 +44,6 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
         fetchSessions();
     }, [MovieId]);
 
-    if (error) return <h2>{error}</h2>;
 
     const handleReserveClick = (session) => {
         if (connection) {
@@ -53,15 +51,16 @@ export default function SessionsInfo({ MovieId, onReserve, setBackToSession }) {
             onReserve(session);
             setBackToSession(true);
         } else {
-            alert('warnning', 'your session expired Please login again')
+            alert('info', 'Login For more access')
+
         }
     };
 
     return (
         <div className="bg-dark px-6 py-12 font-Didot">
-            <h1 className='lg:max-w-7xl max-w-lg mx-auto text-text md:text-6xl text-2xl font-extrabold py-1'>Sessions  </h1>
+            <h1 className=' xl:max-w-7xl lg:max-w-5xl max-w-lg md:max-w-3xl mx-auto text-text md:text-5xl text-2xl font-extrabold py-1'>Sessions  </h1>
 
-            <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-darker border border-border rounded-lg shadow-md">
+            <div className=" xl:max-w-7xl lg:max-w-5xl max-w-lg md:max-w-3xl mx-auto px-6 py-8 bg-darker border border-border rounded-lg shadow-md">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {sessions.map((session) => {
                         const formattedDate = moment(session.displayTime).format('dddd DD/MM');

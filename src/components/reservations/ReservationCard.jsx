@@ -28,7 +28,7 @@ export default function ReservationCard({ movieName, displayTime, seats, roomNam
             });
             if (response.status === 401) {
                 showAlert("error", "Session Expired Please You need to login again")
-                logout();
+                // logout();
                 return;
             }
             if (!response.ok) {

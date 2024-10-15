@@ -43,7 +43,7 @@ export default function Seats({ seats, sessionId }) {
 
             if (response.status === 401) {
                 showAlert("error", "Session Expired. Please log in again.");
-                logout();
+                // logout();
                 return;
             }
             if (!response.ok) {

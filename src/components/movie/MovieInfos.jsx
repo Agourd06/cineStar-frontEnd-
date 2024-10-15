@@ -8,7 +8,7 @@ export default function MovieInfos() {
 
     return (
         <div className="bg-dark px-6 py-12 font-Didot">
-            <div className="lg:max-w-7xl max-w-lg mx-auto px-6 py-8 bg-darker rounded-lg shadow-md">
+            <div className=" xl:max-w-7xl lg:max-w-5xl max-w-lg md:max-w-3xl mx-auto px-6 py-8 bg-darker rounded-lg shadow-md">
                 <div className="grid grid-cols-1 lg:grid-cols-6">
                     <div className="h-auto">
                         <img

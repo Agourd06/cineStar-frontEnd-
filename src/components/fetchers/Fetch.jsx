@@ -1,15 +1,12 @@
-import React from 'react';
+import { config } from '../../config';
 
-export async function makeApiRequest(endPoint, setLoading, setData, method = 'GET', token, alert, body = null, Adding, logout) {
+export async function fetchData(endPoint, method = 'GET', token, body = null) {
     try {
-        setLoading(true);
-
         const headers = {
             'Content-Type': 'application/json',
-            ...(token && { 'Authorization': `Bearer ${token}` }
-
-            ),
+            ...(token && { 'Authorization': `Bearer ${token}` }),
         };
+console.log("tokenn" , token);
 
         const fetchOptions = {
             method: method,
@@ -19,38 +16,21 @@ export async function makeApiRequest(endPoint, setLoading, setData, method = 'GE
         if (method !== 'GET' && body) {
             fetchOptions.body = JSON.stringify(body);
         }
-
-        const response = await fetch(`http://localhost:3000/api/${endPoint}`, fetchOptions);
-
-        if (response.status === 401) {
-            alert('warning', 'Your session expired. Please login again.');
-            logout()
-            return;
-        }
+        const response = await fetch(`${config.API_URL}${endPoint}`, fetchOptions);
+        // if (response.status === 401) {
+        //     throw new Error('Unauthorized');
+        // }
 
         if (!response.ok) {
-            const errorResponse = await response.json(); 
-            alert('error', errorResponse.message || 'Problem in response please try again');
-            return;
+            const errorResponse = await response.json();
+            throw new Error(errorResponse.message || 'Problem in response, please try again');
         }
-        
 
-        if (method === 'POST' || method === 'PUT') {
-            alert('success', `Success`);
-            window.location.reload();
-        }
-        
-        if(method == 'GET'){
+        const responseData = await response.json();
+        return responseData;
 
-            const responseData = await response.json();
-    
-            setData(responseData);
-        }
     } catch (error) {
         console.error('Fetch Error:', error);
-        alert('error', error.message || 'An error occurred while making the request')
-
-    } finally {
-        setLoading(false);
+        throw error;
     }
 }

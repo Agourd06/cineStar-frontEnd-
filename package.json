@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@coreui/react-chartjs": "^3.0.0",
     "boxicons": "^2.1.4",
     "hls.js": "^1.5.16",
     "moment": "^2.30.1",

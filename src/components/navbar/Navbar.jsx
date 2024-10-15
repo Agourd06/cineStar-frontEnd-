@@ -25,8 +25,8 @@ export default function Navbar() {
                 transition-all duration-500 ease-in-out transform ${
                     isNavbarVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
                 } lg:opacity-100 lg:translate-y-0 lg:flex
-                md:justify-between flex-wrap items-center px-11 py-5 font-Didot shadow-lg shadow-black/30 z-40 gap-y-4 lg:gap-y-0`}
-            >
+                md:justify-between flex-wrap items-center px-11 py-5 font-Didot shadow-lg shadow-black/30 z-40 gap-y-4 lg:gap-y-0`}>
+                    
                 <div className='flex justify-between lg:block'>
                    <a href="/"> <img className='w-12 h-12' src="/logo.png" alt="Logo" /></a>
                     <button

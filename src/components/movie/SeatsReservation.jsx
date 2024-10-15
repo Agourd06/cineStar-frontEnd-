@@ -10,7 +10,9 @@ export default function Reservation({ session, setBackToSession }) {
 
 
     const fetchSeatData = async () => {
+
         try {
+
             if (!session) return
             const response = await fetch(`http://localhost:3000/api/client/session/${session._id}`, {
                 method: 'GET',
@@ -22,7 +24,7 @@ export default function Reservation({ session, setBackToSession }) {
 
             if (response.status === 401) {
                 alert('warrning','your session expired Please login again')
-                logout()
+                // logout()
                 return;
             }
 
@@ -32,7 +34,6 @@ export default function Reservation({ session, setBackToSession }) {
 
             const seatData = await response.json();
 
-
             const formattedRows = Array.from({ length: seatData.data.room.capacity }, (_, index) => {
                 const seatNumber = index + 1;
                 return {
@@ -41,13 +42,13 @@ export default function Reservation({ session, setBackToSession }) {
                 };
             });
 
-
             setRows(formattedRows);
 
         } catch (error) {
             alert('error','Problem in showing sessions please try again')
             console.error("Error fetching seat data:", error.message);
         }
+
     };
 
     useEffect(() => {
