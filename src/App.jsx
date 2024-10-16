@@ -6,7 +6,8 @@ import {
 import Alert from "./components/shared/Alert";
 import { router } from './routes';
 import { AuthProvider } from "./context/AuthContext";
-import SideBarContext, { SideBarProvider } from "./context/SideBarContext";
+import  { SideBarProvider } from "./context/SideBarContext";
+import { CheckForConnection } from "./middleWares/CheckForConnection";
 export const AlertContext = createContext()
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
     setAlert({ type, text });
     setTimeout(() => { setAlert(null) }, 2000);
   }
+
+  CheckForConnection()
   return (
     <div>
 

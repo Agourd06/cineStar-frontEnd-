@@ -8,12 +8,9 @@ import StreamingSubscrib from './StreamingSubscrib';
 export default function StreamingSection() {
     const [toggle, setToggle] = useState(false);
     const videoRef = useRef(null);
-    const [client, setClient] = useState({ data: {} });
-    const [loading, setLoading] = useState(false);
-    const alert = useContext(AlertContext)
-    const { token } = useContext(AuthContext)
+    const {  client} = useContext(AuthContext)
 
-    const isSubscribed = client?.user?.subscribed;
+    const isSubscribed = client?.subscribed;
 
 
 
@@ -27,25 +24,7 @@ export default function StreamingSection() {
 
 
 
-    useEffect(() => {
-        const fetchClient = async () => {
-            setLoading(true);
-            try {
-                const response = await fetchData(`client`, 'GET', token);
-                setClient(response);
-            } catch (err) {
-              
-                    alert('info', 'Login Now for more Options');
-             
-            } finally {
-                setLoading(false);
-            }
-        };
-        if (token) {
-
-            fetchClient();
-        }
-    }, [token]);
+  
 
 
 

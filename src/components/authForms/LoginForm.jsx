@@ -51,8 +51,9 @@ export default function LoginForm({ setForm }) {
             const data = await response.json();
 
             const { token } = data;
-
+            const currentTime = new Date().getTime();
             localStorage.setItem('token', token);
+            localStorage.setItem('tokenTime', currentTime);
 
 
             navigate('/');

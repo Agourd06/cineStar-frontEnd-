@@ -27,7 +27,6 @@ export default function Carousel() {
             }
 
             const userData = await response.json();
-            console.log('user data' + userData);
 
             setClient(userData);
 

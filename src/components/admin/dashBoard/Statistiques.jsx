@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Statistiques() {
+    const [statistics , setStatistics] = useState({})
     return (
 
         <div className="bg-darker px-4 text-white w-[95%] mx-auto py-12 rounded-xl relative border border-border">

@@ -28,8 +28,8 @@ export default function Reservation() {
                 },
             });
             if (response.status === 401) {
-                showAlert("error", "Session Expired Please You need to login again")
-                // logout();
+                showAlert("info", "Session Expired Please You need to login again")
+                logout();
                 return;
             }
             if (!response.ok) {
@@ -54,7 +54,6 @@ export default function Reservation() {
 
     }, [isCancled])
 
-    if (!isAuthenticated) return navigate('/auth/login')
 
     return (
         <Canceling.Provider value={setIsCancled}>

@@ -5,16 +5,17 @@ import AuthContext from '../../../context/AuthContext';
 import { fetchData } from '../../fetchers/Fetch';
 import { userId } from '../../../utils/userId';
 import Spinner from '../../shared/Spinner';
-import Loader from '../../loading/Loader';
 
 export default function CommentsInput({ MovieId }) {
     const [loading, setLoading] = useState(false);
+    const [sendingLoading, setSendingLoading] = useState(false);
     const id = userId();
     const [comments, setComments] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMoreComments, setHasMoreComments] = useState(true);
+    const [commentsCount, setCommentsCount] = useState(0)
     const alert = useContext(AlertContext);
-    const { token } = useContext(AuthContext);
+    const { token , isAuthenticated} = useContext(AuthContext);
     const [formData, setFormData] = useState({
         content: '',
         client: id,
@@ -30,27 +31,41 @@ export default function CommentsInput({ MovieId }) {
     };
 
     const handleComment = async () => {
-        setLoading(true);
+        setSendingLoading(true);
         try {
             const response = await fetchData('client/comment/create', 'POST', token, formData);
-            setComments((prevComments) => [...prevComments, response.comment]);
+            console.log('New Comment Response:', response);
+
+            alert('success', 'Comment Created Successfully');
+            setComments((prevComments) => {
+                const updatedComments = [ response.comment,...prevComments];
+                console.log('Updated Comments:', updatedComments);
+                return updatedComments;
+            });
             setFormData({ ...formData, content: '' });
         } catch (err) {
-            alert('info', 'Login for more access');
+            alert('error', err.message);
+            if (!token) {
+                alert('info', 'Login for more access');
+            }
         } finally {
-            setLoading(false);
+            setSendingLoading(false);
         }
     };
+
 
     useEffect(() => {
         const fetchComments = async () => {
             setLoading(true);
             try {
                 const response = await fetchData(`public/comments/${MovieId}?page=${page}`, 'GET');
+                console.log("response", response);
+
                 if (response.comments.length === 0) {
                     setHasMoreComments(false);
                 } else {
                     setComments((prevComments) => [...prevComments, ...response.comments]);
+                    setCommentsCount(response.commentsCount)
                 }
             } catch (err) {
                 alert('Error fetching comments: ' + err.message);
@@ -72,19 +87,19 @@ export default function CommentsInput({ MovieId }) {
         <section className="min-h-[40vh] relative py-4 px-4 lg:px-0">
             <div className="xl:max-w-7xl lg:max-w-5xl max-w-lg md:max-w-3xl mx-auto text-white">
                 <div className="max-w-3xl lg:max-w-full mx-auto ">
-                    <h1 className='xl:max-w-7xl lg:max-w-5xl max-w-lg md:max-w-3xl mx-auto text-text md:text-5xl text-2xl font-extrabold py-1'>Comments({comments.length})</h1>
+                    <h1 className='xl:max-w-7xl lg:max-w-5xl max-w-lg md:max-w-3xl mx-auto text-text md:text-5xl text-2xl font-extrabold py-1'>Comments({commentsCount})</h1>
                 </div>
-                <div className="lg:ml-10 flex md:flex-row flex-col gap-5 justify-center mt-9 items-center">
+              { !isAuthenticated && <div className="lg:ml-10 flex md:flex-row flex-col gap-5 justify-center mt-9 items-center">
                     <p className='flex items-center gap-2'><i className='bx bxs-error text-[#df2144]'></i> Dear user, you must be logged to publish your opinion.</p>
                     <div className="flex gap-4">
-                        <a href="/login" className="lg:px-6 px-4 py-2 rounded-md text-[#EEBB07] duration-500 hover:text-black text-sm border-black border tracking-wider font-semibold outline-none bg-[#303030] hover:bg-[#EEBB07]">
+                        <a href="/auth/login" className="lg:px-6 px-4 py-2 rounded-md text-[#EEBB07] duration-500 hover:text-black text-sm border-black border tracking-wider font-semibold outline-none bg-[#303030] hover:bg-[#EEBB07]">
                             <i className='bx bx-log-in text-white'></i> Log in
                         </a>
-                        <a href="/login" className="lg:px-6 px-4 py-2 rounded-md flex items-center gap-2 text-[#EEBB07] duration-500 hover:text-black text-sm border-black border tracking-wider font-semibold outline-none bg-[#303030] hover:bg-[#EEBB07]">
+                        <a href="/auth/register" className="lg:px-6 px-4 py-2 rounded-md flex items-center gap-2 text-[#EEBB07] duration-500 hover:text-black text-sm border-black border tracking-wider font-semibold outline-none bg-[#303030] hover:bg-[#EEBB07]">
                             <i className='bx bx-user-plus'></i> Register
                         </a>
                     </div>
-                </div>
+                </div> }
                 <div className="relative w-full mt-7 min-w-[200px] rounded-full">
                     <form onSubmit={(e) => {
                         e.preventDefault();
@@ -106,13 +121,21 @@ export default function CommentsInput({ MovieId }) {
                         <button
                             type='submit'
                             className="!absolute right-1 top-1 select-none rounded-xl bg-[#EEBB07] md:py-3 md:px-8 py-1 px-4 text-center align-middle font-sans md:text-sm text-xs font-bold uppercase text-white shadow-md shadow-[#EEBB07]/20 transition-all hover:shadow-lg hover:shadow-[#EEBB07]/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none peer-placeholder-shown:pointer-events-none peer-placeholder-shown:bg-blue-gray-500 peer-placeholder-shown:opacity-50 peer-placeholder-shown:shadow-none">
-                            {loading ? <><Spinner className="mr-2" size={4} /> Sending...</> : 'Send'}
+                            {sendingLoading ? <><Spinner className="mr-2" size={4} /> Sending...</> : 'Send'}
                         </button>
                     </form>
                 </div>
             </div>
-            <CommentsData comments={comments} loading={loading} hasMoreComments={hasMoreComments} handleShowMore={handleShowMore}/>
-        
+            <CommentsData
+                comments={comments}
+                loading={loading}
+                hasMoreComments={hasMoreComments}
+                handleShowMore={handleShowMore}
+                setLoading={setLoading}
+                alert={alert}
+                setComments={setComments}
+            />
+
         </section>
     );
 }

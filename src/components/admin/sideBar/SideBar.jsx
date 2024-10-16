@@ -28,7 +28,7 @@ export default function SideBar() {
                         <h4 className="text-sm text-[#EEBB07] mb-4">Insights</h4>
                         <ul className="space-y-4 px-2 flex-1">
                             <li>
-                                <a href="javascript:void(0)" className="text-gray-600 text-sm flex items-center hover:text-[#EEBB07] transition-all">
+                                <a href="javascript:void(0)" className="text-gray-300 text-sm flex items-center hover:text-[#EEBB07] transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-4 h-4 mr-4"
                                         viewBox="0 0 512 512">
                                         <path
@@ -39,18 +39,18 @@ export default function SideBar() {
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" className="text-gray-600 text-sm flex items-center hover:text-[#EEBB07] transition-all">
+                                <a href="javascript:void(0)" className="text-gray-300 text-sm flex items-center hover:text-[#EEBB07] transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-4 h-4 mr-4"
                                         viewBox="0 0 16 16">
                                         <path
                                             d="M13 .5H3A2.503 2.503 0 0 0 .5 3v10A2.503 2.503 0 0 0 3 15.5h10a2.503 2.503 0 0 0 2.5-2.5V3A2.503 2.503 0 0 0 13 .5ZM14.5 13a1.502 1.502 0 0 1-1.5 1.5H3A1.502 1.502 0 0 1 1.5 13v-.793l3.5-3.5 1.647 1.647a.5.5 0 0 0 .706 0L10.5 7.207V8a.5.5 0 0 0 1 0V6a.502.502 0 0 0-.5-.5H9a.5.5 0 0 0 0 1h.793L7 9.293 5.354 7.647a.5.5 0 0 0-.707 0L1.5 10.793V3A1.502 1.502 0 0 1 3 1.5h10A1.502 1.502 0 0 1 14.5 3Z"
                                             data-original="#000000" />
                                     </svg>
-                                    <span>Insight</span>
+                                    <span>Clients</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" className="text-gray-600 text-sm flex items-center hover:text-[#EEBB07] transition-all">
+                                <a href="javascript:void(0)" className="text-gray-300 text-sm flex items-center hover:text-[#EEBB07] transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-4 h-4 mr-4"
                                         viewBox="0 0 512 512">
                                         <path
@@ -72,21 +72,21 @@ export default function SideBar() {
                     <hr className="my-6 border-[#EEBB07]" />
 
                     <div className="flex-1">
-                        <h4 className="text-sm  mb-4 text-[#EEBB07]">Shared</h4>
+                        <h4 className="text-sm  mb-4 text-[#EEBB07]">Management</h4>
                         <ul className="space-y-4 px-2 flex-1">
                             <li>
-                                <a href="javascript:void(0)" className="text-gray-600 text-sm flex items-center hover:text-[#EEBB07] transition-all">
+                                <a href="/user-manage" className="text-gray-300 text-sm flex items-center hover:text-[#EEBB07] transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-4 h-4 mr-4"
                                         viewBox="0 0 511.414 511.414">
                                         <path
                                             d="M497.695 108.838a16.002 16.002 0 0 0-9.92-14.8L261.787 1.2a16.003 16.003 0 0 0-12.16 0L23.639 94.038a16 16 0 0 0-9.92 14.8v293.738a16 16 0 0 0 9.92 14.8l225.988 92.838a15.947 15.947 0 0 0 12.14-.001c.193-.064-8.363 3.445 226.008-92.837a16 16 0 0 0 9.92-14.8zm-241.988 76.886-83.268-34.207L352.39 73.016l88.837 36.495zm-209.988-51.67 71.841 29.513v83.264c0 8.836 7.164 16 16 16s16-7.164 16-16v-70.118l90.147 37.033v257.797L45.719 391.851zM255.707 33.297l55.466 22.786-179.951 78.501-61.035-25.074zm16 180.449 193.988-79.692v257.797l-193.988 79.692z"
                                             data-original="#000000" />
                                     </svg>
-                                    <span>Product</span>
+                                    <span>Users</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" className="text-gray-600 text-sm flex items-center hover:text-[#EEBB07] transition-all">
+                                <a href="javascript:void(0)" className="text-gray-300 text-sm flex items-center hover:text-[#EEBB07] transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke='currentColor'
                                         className="w-4 h-4 mr-4" viewBox="0 0 682.667 682.667">
                                         <defs>
@@ -103,11 +103,11 @@ export default function SideBar() {
                                                 data-original="#000000" />
                                         </g>
                                     </svg>
-                                    <span>Inbox</span>
+                                    <span>Rooms</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" className="text-gray-600 text-sm flex items-center hover:text-[#EEBB07] transition-all">
+                                <a href="javascript:void(0)" className="text-gray-300 text-sm flex items-center hover:text-[#EEBB07] transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-4 h-4 mr-4"
                                         viewBox="0 0 193.769 193.769">
                                         <path
@@ -126,7 +126,7 @@ export default function SideBar() {
                     <div className="mt-4">
                         <ul className="space-y-4 px-2">
                             <li>
-                                <a href="javascript:void(0)" className="text-gray-600 text-sm flex items-center hover:text-[#EEBB07] transition-all">
+                                <a href="javascript:void(0)" className="text-gray-300 text-sm flex items-center hover:text-[#EEBB07] transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" l="currentColor" className="w-4 h-4 mr-4 fill-gray-600" viewBox="0 0 24 24">
                                         <path d="M13.12 24h-2.24a1.498 1.498 0 0 1-1.486-1.32l-.239-1.876a9.45 9.45 0 0 1-1.374-.569l-1.494 1.161a1.492 1.492 0 0 1-1.985-.126l-1.575-1.575a1.488 1.488 0 0 1-.122-1.979l1.161-1.495a9.232 9.232 0 0 1-.569-1.374l-1.88-.239A1.501 1.501 0 0 1 0 13.12v-2.24c0-.757.567-1.396 1.32-1.486l1.876-.239a9.45 9.45 0 0 1 .569-1.374l-1.16-1.494a1.49 1.49 0 0 1 .127-1.986l1.575-1.575a1.489 1.489 0 0 1 1.979-.122L7.78 3.766a9.416 9.416 0 0 1 1.375-.569l.239-1.88C9.484.567 10.123 0 10.88 0h2.24c.757 0 1.396.567 1.486 1.32l.239 1.876c.478.155.938.346 1.375.569l1.494-1.161a1.49 1.49 0 0 1 1.985.127l1.575 1.575c.537.521.591 1.374.122 1.979L20.235 7.78c.224.437.415.897.569 1.374l1.88.239A1.5 1.5 0 0 1 24 10.88v2.24c0 .757-.567 1.396-1.32 1.486l-1.876.239a9.45 9.45 0 0 1-.569 1.374l1.161 1.494a1.49 1.49 0 0 1-.127 1.985l-1.575 1.575a1.487 1.487 0 0 1-1.979.122l-1.495-1.161a9.232 9.232 0 0 1-1.374.569l-.239 1.88A1.5 1.5 0 0 1 13.12 24zm-5.39-4.86c.083 0 .168.021.244.063a8.393 8.393 0 0 0 1.774.736.5.5 0 0 1 .358.417l.28 2.2c.03.251.247.444.494.444h2.24a.504.504 0 0 0 .493-.439l.281-2.204a.5.5 0 0 1 .358-.417 8.393 8.393 0 0 0 1.774-.736.499.499 0 0 1 .55.042l1.75 1.36a.492.492 0 0 0 .655-.034l1.585-1.585a.495.495 0 0 0 .039-.66l-1.36-1.75a.5.5 0 0 1-.042-.55 8.393 8.393 0 0 0 .736-1.774.5.5 0 0 1 .417-.358l2.2-.28A.507.507 0 0 0 23 13.12v-2.24a.504.504 0 0 0-.439-.493l-2.204-.281a.5.5 0 0 1-.417-.358 8.393 8.393 0 0 0-.736-1.774.497.497 0 0 1 .042-.55l1.36-1.75a.49.49 0 0 0-.033-.654l-1.585-1.585a.492.492 0 0 0-.66-.039l-1.75 1.36a.5.5 0 0 1-.551.042 8.359 8.359 0 0 0-1.774-.736.5.5 0 0 1-.358-.417l-.28-2.2A.507.507 0 0 0 13.12 1h-2.24a.504.504 0 0 0-.493.439l-.281 2.204a.502.502 0 0 1-.358.418 8.356 8.356 0 0 0-1.774.735.5.5 0 0 1-.551-.041l-1.75-1.36a.49.49 0 0 0-.654.033L3.434 5.014a.495.495 0 0 0-.039.66l1.36 1.75a.5.5 0 0 1 .042.55 8.341 8.341 0 0 0-.736 1.774.5.5 0 0 1-.417.358l-2.2.28A.505.505 0 0 0 1 10.88v2.24c0 .247.193.464.439.493l2.204.281a.5.5 0 0 1 .417.358c.18.626.428 1.223.736 1.774a.497.497 0 0 1-.042.55l-1.36 1.75a.49.49 0 0 0 .033.654l1.585 1.585a.494.494 0 0 0 .66.039l1.75-1.36a.515.515 0 0 1 .308-.104z" data-original="#000000" />
                                         <path d="M12 17c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5zm0-9c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z" data-original="#000000" />
@@ -135,7 +135,7 @@ export default function SideBar() {
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" className="text-gray-600 text-sm flex items-center hover:text-[#EEBB07] transition-all">
+                                <a href="javascript:void(0)" className="text-gray-300 text-sm flex items-center hover:text-[#EEBB07] transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-4 h-4 mr-4"
                                         viewBox="0 0 512 512">
                                         <path
@@ -150,7 +150,7 @@ export default function SideBar() {
                         <div className="flex flex-wrap items-center cursor-pointer border-t border-[#EEBB07] py-2 mt-6">
                             <img src='https://readymadeui.com/team-2.webp' className="w-10 h-10 rounded-md border-2 border-white" />
                             <div className="ml-4">
-                                <p className="text-sm text-gray-600 font-semibold">John Doe</p>
+                                <p className="text-sm text-gray-300 font-semibold">John Doe</p>
                                 <p className="text-xs text-white mt-0.5">Active free account</p>
                             </div>
                         </div>

@@ -2,11 +2,11 @@ import { config } from '../../config';
 
 export async function fetchData(endPoint, method = 'GET', token, body = null) {
     try {
+        
         const headers = {
             'Content-Type': 'application/json',
             ...(token && { 'Authorization': `Bearer ${token}` }),
         };
-console.log("tokenn" , token);
 
         const fetchOptions = {
             method: method,
@@ -17,10 +17,7 @@ console.log("tokenn" , token);
             fetchOptions.body = JSON.stringify(body);
         }
         const response = await fetch(`${config.API_URL}${endPoint}`, fetchOptions);
-        // if (response.status === 401) {
-        //     throw new Error('Unauthorized');
-        // }
-
+      
         if (!response.ok) {
             const errorResponse = await response.json();
             throw new Error(errorResponse.message || 'Problem in response, please try again');
