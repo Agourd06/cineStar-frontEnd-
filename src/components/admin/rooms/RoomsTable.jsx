@@ -3,8 +3,8 @@ import { AlertContext } from '../../../App'
 import { fetchData } from '../../fetchers/Fetch'
 import AuthContext from '../../../context/AuthContext'
 
-export default function UserTable({
-    users,
+export default function RoomsTable({
+    rooms,
     handleShowMore,
     setUsers,
     loading,
@@ -19,12 +19,12 @@ export default function UserTable({
         setDeletingId(id);
 
         try {
-            await fetchData(`admin/delete/${id}`, 'PUT', token);
+            await fetchData(`admin/room/${id}`, 'PUT', token);
 
             const updatedUsers = users.filter((user)=>user._id !== id)
             setUsers(updatedUsers);
 
-            Alert('success', 'User Managed Successfully');
+            Alert('success', 'Room Managed Successfully');
         } catch (err) {
             Alert('error', err.message);
         } finally {
@@ -44,19 +44,10 @@ export default function UserTable({
                             Name
                         </th>
                         <th className="p-4 text-left text-xs font-bold text-gray-300">
-                            Email
+                            Capacity
                         </th>
                         <th className="p-4 text-left text-xs font-bold text-gray-300">
-                            Role
-                        </th>
-                        <th className="p-4 text-left text-xs font-bold text-gray-300">
-                            Subscribed
-                        </th>
-                        <th className="p-4 text-left text-xs font-bold text-gray-300">
-                            Joined At
-                        </th>
-                        <th className="p-4 text-left text-xs font-bold text-gray-300">
-                            Banned
+                            Created At
                         </th>
                         <th className="p-4 text-left text-xs font-bold text-gray-300">
                             Actions
@@ -66,32 +57,29 @@ export default function UserTable({
                 </thead>
 
                 <tbody className="whitespace-nowrap rounded-lg">
-                    {users.map((user) => (
+                    {rooms.map((room) => (
                         <tr key={user._id} className="hover:bg-black border border-border duration-700 rounded-lg">
                             <td className="p-4 text-[15px] text-gray-400 rounded-lg">
-                                {user.name}
+                                {room.name}
                             </td>
                             <td className="p-4 text-[15px] text-gray-400">
-                                {user.email}
-                            </td>
-                            <td className="p-4 text-[15px] text-gray-400">
-                                {user.role}
+                                {room.capacity}
                             </td>
                             <td className="p-4 text-[15px] text-gray-400 pl-8">
-                                {user.subscribed ? <i className='bx bx-check text-green-700 text-2xl'></i> : <i className='bx bx-x text-red-700 text-2xl'></i>}
+                                {room.subscribed ? <i className='bx bx-check text-green-700 text-2xl'></i> : <i className='bx bx-x text-red-700 text-2xl'></i>}
                             </td>
                             <td className="p-4 text-[15px] text-gray-400">
-                                {new Date(user.createdAt).toLocaleDateString()}
+                                {new Date(room.createdAt).toLocaleDateString()}
                             </td>
                             <td className="p-4 text-[15px] text-gray-400 pl-8">
-                                {user.deleted_at ? <i className='bx bx-check text-green-700 text-2xl'></i> : <i className='bx bx-x text-red-700 text-2xl'></i>}
+                                {room.deleted_at ? <i className='bx bx-check text-green-700 text-2xl'></i> : <i className='bx bx-x text-red-700 text-2xl'></i>}
                             </td>
                             <td className="p-4 pl-7 flex items-center">
-                                    {/* <button onClick={() => archiveUser(user._id)} className="mr-4" title="Update">
+                                    <button onClick={() => archiveUser(room._id)} className="mr-4" title="Update">
                                     <i className='bx bx-edit-alt text-xl hover:text-blue-700 text-blue-500'></i>
-                                    </button> */}
-                             
-                                    <button onClick={() => archiveUser(user._id)} className="mr-4" title="Delete">
+                                    </button>
+
+                                    <button onClick={() => archiveUser(room._id)} className="mr-4" title="Delete">
                                         <i className='bx bx-trash text-xl hover:text-red-700 text-red-500'></i> 
                                     </button>
                              

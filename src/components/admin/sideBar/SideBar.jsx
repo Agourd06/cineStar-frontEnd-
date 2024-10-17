@@ -6,7 +6,7 @@ export default function SideBar() {
     return (
         <>
             <button onClick={toggleSideBar} className={`bg-darker duration-700 shadow-xl shadow-white/10 h-screen fixed top-0 left-0 min-w-[10px] py-6 px-1 font-[sans-serif] overflow-auto rounded-r-3xl text-white ${isSideBarVisible ? 'opacity-0 -translate-x-full' : 'opacity-100 translate-x-0'}`}>
-                <i class='bx bx-chevron-right text-white lg:text-3xl md:text-xl'></i>
+                <i className='bx bx-chevron-right text-white lg:text-3xl md:text-xl'></i>
             </button>
             <nav className={`${isSideBarVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
                 } bg-darker shadow-xl shadow-white/10 h-screen z-50 duration-700 fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] overflow-auto rounded-r-3xl`}>
@@ -19,7 +19,7 @@ export default function SideBar() {
                             <p className="text-lg text-text font-semibold">CineStar <span className='text-xs text-[#EEBB07]'>Admin</span></p>
                         </div>
 
-                        <i onClick={toggleSideBar} class='bx bx-chevron-left text-white pl-4 text-3xl'></i>
+                        <i onClick={toggleSideBar} className='bx bx-chevron-left text-white pl-4 text-3xl'></i>
                     </div>
 
                     <hr className="my-6 border-[#EEBB07]" />
