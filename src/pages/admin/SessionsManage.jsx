@@ -4,37 +4,44 @@ import SideBarContext from '../../context/SideBarContext';
 import AuthContext from '../../context/AuthContext';
 import { AlertContext } from '../../App';
 import { fetchData } from '../../components/fetchers/Fetch';
-import RoomsTable from '../../components/admin/rooms/RoomsTable';
-import RoomForm from '../../components/admin/rooms/RoomForm';
+import SessionsTable from '../../components/admin/sessions/SessionsTable';
+import SessionForm from '../../components/admin/sessions/SessionsForm';
 
-export default function RoomsManage() {
+
+export default function SessionsManage() {
     const { isSideBarVisible } = useContext(SideBarContext);
     const { client } = useContext(AuthContext)
     const [toggle, setToggle] = useState(false)
+    const [sessions, setSessions] = useState([])
+    const [movies, setMovies] = useState([])
     const [rooms, setRooms] = useState([])
     const Alert = useContext(AlertContext)
     const { token } = useContext(AuthContext)
     const [page, setPage] = useState(1);
-    const [hasMoreRooms, setHasMoreRooms] = useState(true);
+    const [hasMoreSessions, setHasMoreSessions] = useState(true);
     const [loading, setLoading] = useState(false)
     const [updating, setUpdating] = useState(false)
-    const [updateData , setUpdateData] = useState({
-        name: '',
-        capacity: '',
-        room_type: ''
+    const [updateData, setUpdateData] = useState({
+        price: '',
+        displayTime: null,
+        movie: '',
+        room: '',
     });
+console.log(sessions);
 
     useEffect(() => {
-        const fetchRooms = async () => {
+        const fetchSessions = async () => {
             setLoading(true);
             try {
-                const response = await fetchData(`admin/rooms?page=${page}`, 'GET', token);
-
-                if (response.data.length === 0) {
-                    setHasMoreRooms(false);
+                const response = await fetchData(`admin/sessions?page=${page}`, 'GET', token);
+                
+                if (response.sessions.length === 0) {
+                    setHasMoreSessions(false);
                 } else {
-                    setRooms((prevUsers) => [...prevUsers, ...response.data]);
+                    setSessions((prevUsers) => [...prevUsers, ...response.sessions]);
                 }
+                setMovies(response.movies);
+                setRooms(response.rooms);
 
             } catch (error) {
                 Alert('error', error.message);
@@ -44,15 +51,17 @@ export default function RoomsManage() {
         };
 
         if (token) {
-            fetchRooms();
+            fetchSessions();
         }
     }, [token, page]);
+    
 
     const handleShowMore = () => {
-        if (hasMoreRooms) {
+        if (hasMoreSessions) {
             setPage((prevPage) => prevPage + 1);
         }
     };
+
     return (
 
         <div className='bg-dark min-h-screen flex'>
@@ -63,13 +72,13 @@ export default function RoomsManage() {
             >
                 <div className=" flex justify-between  pr-2">
                     <div className='flex items-center gap-8'>
-                        <h1 className=' text-text md:text-5xl text-2xl font-extrabold py-1  pb-4'>Room Manage</h1>
-                        <button onClick={() => { setToggle(true) }} className='px-5 py-3 rounded-lg border border-border bg-darker hover:bg-[#EEBB07] duration-700'>Create Room</button>
+                        <h1 className=' text-text md:text-5xl text-2xl font-extrabold py-1  pb-4'>Sessions Manage</h1>
+                        <button onClick={() => { setToggle(true) }} className='px-5 py-3 rounded-lg border border-border bg-darker hover:bg-[#EEBB07] duration-700'>Create Session</button>
                     </div>
                     <h1 className=' text-text md:text-4xl text-xl font-extrabold py-1'> {client.name}</h1>
                 </div>
-                <RoomsTable setUpdating={setUpdating} setUpdateData={setUpdateData} rooms={rooms} handleShowMore={handleShowMore} setRooms={setRooms} loading={loading} hasMoreRooms={hasMoreRooms}/>
-                {(toggle || updating) && <RoomForm setToggle={setToggle} setRooms={setRooms} updateData={updateData} updating={updating} setUpdating={setUpdating} setUpdateData={setUpdateData}/>}
+                <SessionsTable setUpdating={setUpdating} setUpdateData={setUpdateData} sessions={sessions} handleShowMore={handleShowMore} setSessions={setSessions} loading={loading} hasMoreSessions={hasMoreSessions} movies={movies} rooms={rooms} />
+                {(toggle || updating) && <SessionForm setToggle={setToggle} setSessions={setSessions} updateData={updateData} updating={updating} setUpdating={setUpdating} setUpdateData={setUpdateData} movies={movies} rooms={rooms} />}
 
             </div>
         </div>

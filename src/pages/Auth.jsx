@@ -13,7 +13,7 @@ export default function Login() {
  const { isAuthenticated } = useContext(AuthContext)
  const navigate = useNavigate()
 
-if(isAuthenticated) return navigate(-1)
+if(isAuthenticated) return navigate('/')
 
   const forms = {
     register : <RegisterForm setForm={setForm}/> ,

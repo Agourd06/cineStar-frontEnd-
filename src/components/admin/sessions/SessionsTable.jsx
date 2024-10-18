@@ -3,14 +3,16 @@ import { AlertContext } from '../../../App'
 import { fetchData } from '../../fetchers/Fetch'
 import AuthContext from '../../../context/AuthContext'
 
-export default function RoomsTable({
-    rooms,
+export default function SessionsTable({
+    sessions,
     handleShowMore,
-    setRooms,
+    setSessions,
     loading,
-    hasMoreRooms,
+    hasMoreSessions,
     setUpdateData,
-    setUpdating
+    setUpdating,
+    movies,
+    rooms
 }) {
 
     const Alert = useContext(AlertContext)
@@ -43,13 +45,16 @@ export default function RoomsTable({
                 <thead className="bg-darker whitespace-nowrap border border-border rounded-lg">
                     <tr>
                         <th className="p-4 text-left text-xs font-bold text-gray-300">
-                            Name
+                            Movie
                         </th>
                         <th className="p-4 text-left text-xs font-bold text-gray-300">
-                            Capacity
+                            Price
                         </th>
                         <th className="p-4 text-left text-xs font-bold text-gray-300">
-                            Type
+                            Room
+                        </th>
+                        <th className="p-4 text-left text-xs font-bold text-gray-300">
+                            Show Time
                         </th>
                         <th className="p-4 text-left text-xs font-bold text-gray-300">
                             Created At
@@ -62,31 +67,36 @@ export default function RoomsTable({
                 </thead>
 
                 <tbody className="whitespace-nowrap rounded-lg">
-                    {rooms.map((room) => (
-                        <tr key={room._id} className="hover:bg-black border border-border duration-700 rounded-lg">
+                    {sessions.map((session) => (
+                        <tr key={session._id} className="hover:bg-black border border-border duration-700 rounded-lg">
                             <td className="p-4 text-[15px] text-gray-400 rounded-lg">
-                                {room.name}
+                                {session.movie.name}
+
                             </td>
                             <td className="p-4 text-[15px] text-gray-400">
-                                {room.capacity}
+                                {session.price}
                             </td>
                             <td className="p-4 text-[15px] text-gray-400">
-                                {room.room_type}
+                                {session.room.name}
+                            </td>
+                            <td className="p-4 text-[15px] text-gray-400">
+
+                                {new Date(session.displayTime).toLocaleDateString('en-GB')} {new Date(session.displayTime).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
                             </td>
 
                             <td className="p-4 text-[15px] text-gray-400">
-                                {new Date(room.createdAt).toLocaleDateString()}
+                                {new Date(session.createdAt).toLocaleDateString()}
                             </td>
                             <td className="p-4 pl-3 flex items-center">
                                 <button onClick={() => {
-                                    setUpdateData({ name: room.name, capacity: room.capacity, room_type: room.room_type , _id:room._id });
+                                    setUpdateData({ price: session.price, displayTime: session.displayTime, movie: session.movie._id,  room: session.room._id, _id: session._id });
                                     setUpdating(true);
                                 }}
                                     className="mr-4" title="Update">
                                     <i className='bx bx-edit-alt text-xl hover:text-blue-700 text-blue-500'></i>
                                 </button>
 
-                                <button onClick={() => archiveRoom(room._id)} className="mr-4" title="Delete">
+                                <button onClick={() => archiveRoom(session._id)} className="mr-4" title="Delete">
                                     <i className='bx bx-trash text-xl hover:text-red-700 text-red-500'></i>
                                 </button>
 
@@ -95,7 +105,7 @@ export default function RoomsTable({
                     ))}
                 </tbody>
             </table>
-            {hasMoreRooms && !loading && (
+            {hasMoreSessions && !loading && (
                 <button onClick={handleShowMore} className="mt-4 w-full bg-[#EEBB07]/50 hover:bg-[#EEBB07] duration-700 text-white border border-border px-4 py-2" disabled={loading}>
                     {loading ? 'Loading...' : 'Load More Users'}
                 </button>

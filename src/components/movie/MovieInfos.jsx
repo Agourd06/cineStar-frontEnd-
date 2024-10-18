@@ -1,5 +1,8 @@
 import React, { useContext } from 'react';
 import MovieContext from '../../context/MovieContext';
+import { config } from '../../config';
+import FavoritButton from './favorit/FavoritButton';
+import RatingPopUp from './rating/RatingPopUp';
 
 export default function MovieInfos() {
     const { movie, loading } = useContext(MovieContext);
@@ -8,11 +11,11 @@ export default function MovieInfos() {
 
     return (
         <div className="bg-dark px-6 py-12 font-Didot">
-            <div className=" xl:max-w-7xl lg:max-w-5xl max-w-lg md:max-w-3xl mx-auto px-6 py-8 bg-darker rounded-lg shadow-md">
-                <div className="grid grid-cols-1 lg:grid-cols-6">
+            <div className=" xl:max-w-7xl lg:max-w-5xl max-w-lg md:max-w-3xl mx-auto  pt -8 bg-darker rounded-lg shadow-md">
+                <div className="grid grid-cols-1 lg:grid-cols-6 px-6 py-4">
                     <div className="h-auto">
                         <img
-                            src={`http://localhost:3000/images/${movie.data.media}`}
+                            src={`${config.MinIo_URL}${movie.data.image}`}
                             alt="Image"
                             className="rounded-md object-cover"
                         />
@@ -31,10 +34,7 @@ export default function MovieInfos() {
                                 <h3 className='text-[#EEBB07]'>Duration:</h3>
                                 <p>{movie.data.duration} Minutes</p>
                             </div>
-                            <div className='flex justify-between pr-20'>
-                                <h3 className='text-[#EEBB07]'>Author:</h3>
-                                <p>{movie.data.autor}</p>
-                            </div>
+
                         </div>
                     </div>
                     <div className="flex justify-end pl-5 rounded-lg lg:col-span-2">
@@ -46,6 +46,11 @@ export default function MovieInfos() {
                             allowFullScreen
                         ></iframe>
                     </div>
+                </div>
+                <div className='border border-border flex justify-between py-2 px-7 rounded-lg items-center'>
+                    <FavoritButton movie={movie.data._id}/>
+                    {/* <div><p className='hover:text-[#EEBB07] text-white duration-500 cursor-pointer font-bold'>Review</p></div> */}
+                    <RatingPopUp movieId={movie.data._id}/>
                 </div>
             </div>
         </div>

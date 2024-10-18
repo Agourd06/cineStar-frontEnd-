@@ -47,6 +47,7 @@ export default function Reservation() {
         }
 
     }
+    console.log(reservations);
 
     useEffect(() => {
 

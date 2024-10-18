@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import MovieContext from '../../../context/MovieContext';
+import { config } from '../../../config';
 
 export default function StreamingVideo({ videoRef, handleToggle }) {
     const { movie, loading } = useContext(MovieContext);
     useEffect(() => {
         if (movie && movie.data.videoToken) {
-            const signedUrl = `${movie.data.video}?token=${movie.data.videoToken}`;
-            videoRef.current.src = signedUrl;
+            const signedUrl = `${movie.data.video}`;
+            videoRef.current.src = `${config.MinIo_URL}${signedUrl}`;
         }
     }, [movie]);
     return (

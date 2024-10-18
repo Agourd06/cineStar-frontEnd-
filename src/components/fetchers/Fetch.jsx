@@ -1,11 +1,10 @@
 import { config } from '../../config';
 
-export async function fetchData(endPoint, method = 'GET', token, body = null) {
+export async function fetchData(endPoint, method = 'GET', token, body = null, isFormData = false) {
     try {
-        
         const headers = {
-            'Content-Type': 'application/json',
             ...(token && { 'Authorization': `Bearer ${token}` }),
+            ...(isFormData ? {} : { 'Content-Type': 'application/json' }), 
         };
 
         const fetchOptions = {
@@ -14,8 +13,9 @@ export async function fetchData(endPoint, method = 'GET', token, body = null) {
         };
 
         if (method !== 'GET' && body) {
-            fetchOptions.body = JSON.stringify(body);
+            fetchOptions.body = isFormData ? body : JSON.stringify(body);
         }
+
         const response = await fetch(`${config.API_URL}${endPoint}`, fetchOptions);
       
         if (!response.ok) {

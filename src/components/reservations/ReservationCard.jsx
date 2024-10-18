@@ -5,6 +5,7 @@ import Spinner from '../shared/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { Canceling } from '../../pages/Reservation';
 import AuthContext from '../../context/AuthContext';
+import { config } from '../../config';
 
 
 export default function ReservationCard({ movieName, displayTime, seats, roomName, totalPrice, movieImg, reservationId, status }) {
@@ -52,7 +53,8 @@ export default function ReservationCard({ movieName, displayTime, seats, roomNam
         <>
             <div className='relative bg-darker border border-border rounded-lg shadow-md text-text/70'>
                 <div className='px-6 py-4 grid grid-cols-3 gap-4'>
-                    <img src={`http://localhost:3000/images/${movieImg}`} alt="movie" />
+                    <img src={`${config.MinIo_URL}${movieImg}`}
+                        alt="movie" />
                     <div className='col-span-2'>
                         <h1 className='text-3xl font-bold'>{movieName}</h1>
                         <div className='py-1'>

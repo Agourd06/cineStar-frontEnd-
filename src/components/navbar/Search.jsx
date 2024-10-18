@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Spinner from '../shared/Spinner';
 import { searchMovies } from '../fetchers/SearchSessionFetch';
+import { config } from '../../config';
 
 export default function Search() {
     const [search, setSearch] = useState({ search: '' });
@@ -61,7 +62,7 @@ export default function Search() {
                         movies.map((movie) => (
 
                             <a key={movie._id} href={`/movie/${movie._id}`} className="p-3 border-b border-gray-700 hover:bg-gray-800 flex cursor-pointer gap-4">
-                                <img src={`http://localhost:3000/images/${movie.media}`} alt="" className='w-14 ' />
+                                <img src={`${config.MinIo_URL}${movie.image}`} alt="" className='w-14 ' />
                                 <div>
                                     <p className='text-lg font-bold'>{movie.name}</p>
                                     <hr />

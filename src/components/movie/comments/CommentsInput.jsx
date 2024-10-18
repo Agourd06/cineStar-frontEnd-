@@ -21,6 +21,7 @@ export default function CommentsInput({ MovieId }) {
         client: id,
         movie: MovieId,
     });
+        
 
     const handleChange = (e) => {
         const { name, value } = e.target;

@@ -31,9 +31,8 @@ export default function UserForm({ setToggle , setUsers }) {
         setLoading(true)
         try {
             const response = await fetchData('admin/create', 'POST', token, formData)
-            console.log(response);
             
-            setUsers((prev)=>[response.user , ...prev])
+            setUsers((prev)=>{[response.user , ...prev]})
             alert('success', 'User Added SuccessFully')
         } catch (error) {
 
@@ -51,7 +50,7 @@ export default function UserForm({ setToggle , setUsers }) {
                 <i onClick={() => { setToggle(false) }} class='bx bx-x absolute top-3 right-3 text-3xl cursor-pointer hover:text-white/70'></i>
                 <div className="font-[sans-serif] ">
                     <div className="text-center min-h-[160px] sm:p-6 p-4">
-                        <h4 className="sm:text-3xl text-2xl font-bold text-white">Add User</h4>
+                        <h4 className="sm:text-3xl text-2xl font-bold text-white">{updating ? 'Update User' : 'Create User'}</h4>
                     </div>
 
                     <div className="mx-4 mb-4 -mt-16">
